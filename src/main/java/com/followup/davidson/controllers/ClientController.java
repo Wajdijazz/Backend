@@ -1,6 +1,7 @@
 package com.followup.davidson.controllers;
 
 
+import com.followup.davidson.Routes;
 import com.followup.davidson.model.Client;
 import com.followup.davidson.services.IClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +12,30 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/")
+@RequestMapping(Routes.CLIENT)
 public class ClientController {
 
 
     @Autowired
     private IClientService clientService;
-    @GetMapping("/clients")
+    @GetMapping("/")
     public List<Client> getAllClient() {
         return clientService.findAll();
     }
 
 
-    @PostMapping("/clients")
+    @PostMapping("/")
     public Client createClient(@Valid @RequestBody Client client) {
         return clientService.create(client);
     }
 
-    @GetMapping("/client/{id}")
+    @GetMapping("/{id}")
     public Client findClientById(@PathVariable(value = "id") Long clientId)
     {
         return clientService.findById(clientId);
 
     }
-    @DeleteMapping("/client/{id}")
+    @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable(value = "id") Long clientId)
     {
         clientService.deleteClient(clientId);

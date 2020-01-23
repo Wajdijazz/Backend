@@ -21,13 +21,13 @@ public class Project {
     @NotEmpty
     private String projectName;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "client_id")
     private Client client;
 
     @OneToMany(mappedBy = "project",  cascade = CascadeType.ALL)
     private List<TJ> TJs;
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Intervention> interventions;
 }

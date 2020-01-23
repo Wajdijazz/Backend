@@ -1,5 +1,6 @@
 package com.followup.davidson.services;
 
+import com.followup.davidson.model.Client;
 import com.followup.davidson.model.Project;
 
 import java.util.List;

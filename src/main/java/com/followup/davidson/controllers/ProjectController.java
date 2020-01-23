@@ -2,6 +2,7 @@ package com.followup.davidson.controllers;
 
 
 
+import com.followup.davidson.Routes;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.services.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,30 +13,30 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api")
+@RequestMapping(Routes.PROJECT)
 public class ProjectController {
 
     @Autowired
     private IProjectService projectService;
 
-    @GetMapping("/projects")
+    @GetMapping("/")
     public List<Project> getAllProject() {
         return projectService.findAll();
     }
 
 
-    @PostMapping("/projects")
+    @PostMapping("/")
     public Project createProject(@Valid @RequestBody Project project) {
         return projectService.create(project);
     }
 
-    @GetMapping("/project/{id}")
+    @GetMapping("/{id}")
     public Project findProjectById(@PathVariable(value = "id") Long projectId)
     {
         return projectService.findById(projectId);
 
     }
-    @DeleteMapping("/project/{id}")
+    @DeleteMapping("/{id}")
     public void deletePeroject(@PathVariable(value = "id") Long projectId)
     {
         projectService.deleteProject(projectId);

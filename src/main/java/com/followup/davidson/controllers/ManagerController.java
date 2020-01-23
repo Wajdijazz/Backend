@@ -1,6 +1,7 @@
 package com.followup.davidson.controllers;
 
 
+import com.followup.davidson.Routes;
 import com.followup.davidson.model.Client;
 import com.followup.davidson.model.Manager;
 import com.followup.davidson.services.IManagerService;
@@ -12,30 +13,30 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api")
+@RequestMapping(Routes.Manger)
 public class ManagerController {
 
     @Autowired
     private IManagerService managerService;
 
-    @GetMapping("/managers")
+    @GetMapping("/")
     public List<Manager> getAllManager() {
         return managerService.findAll();
     }
 
 
-    @PostMapping("/managers")
+    @PostMapping("/")
     public Manager createManager(@Valid @RequestBody Manager manager) {
         return managerService.create(manager);
     }
 
-    @GetMapping("/manager/{id}")
+    @GetMapping("/{id}")
     public Manager findManagerById(@PathVariable(value = "id") Long managerId)
     {
         return managerService.findById(managerId);
 
     }
-    @DeleteMapping("/manager/{id}")
+    @DeleteMapping("/{id}")
     public void deleteManager(@PathVariable(value = "id") Long managerId)
     {
         managerService.deleteManager(managerId);

@@ -10,12 +10,11 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping("/api/")
+@RequestMapping("/api")
+
 public class PersonController {
     @Autowired
     private IPersonService personService;
-
     @GetMapping("/persons")
     public List<Person> getAllPerson() {
         return personService.findAll();

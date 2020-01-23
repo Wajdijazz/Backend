@@ -25,20 +25,16 @@ public class Person {
     private Long personId;
 
     @NotEmpty
-    @Column(unique = true)
     private String firstName;
     @NotEmpty
     private String lastName;
 
 
 
-
-
-    @OneToMany(mappedBy = "person",   cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person",  fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TJ> TJs;
-/*
+
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Intervention> interventions;
 
-*/
 }

@@ -27,7 +27,7 @@ public class Project {
 
     @OneToMany(mappedBy = "project",  cascade = CascadeType.ALL)
     private List<TJ> TJs;
-/*
+
     @OneToMany(mappedBy = "project", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Intervention> interventions;*/
+    private List<Intervention> interventions;
 }

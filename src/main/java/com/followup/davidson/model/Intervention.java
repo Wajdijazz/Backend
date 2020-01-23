@@ -31,7 +31,6 @@ public class Intervention {
 
 
     private long worked;
-    /*
     @ManyToOne
     @JoinColumn(name = "person_id")
     private Person person;
@@ -39,5 +38,5 @@ public class Intervention {
     @JoinColumn(name = "project_id")
     private Project project;
 
-     */
+
 }

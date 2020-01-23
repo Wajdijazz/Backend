@@ -27,11 +27,12 @@ public class Person {
     @NotEmpty
     @Column(unique = true)
     private String firstName;
-
-
-
     @NotEmpty
     private String lastName;
+
+
+
+
 
     @OneToMany(mappedBy = "person",   cascade = CascadeType.ALL)
     private List<TJ> TJs;

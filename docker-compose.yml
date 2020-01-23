@@ -1,0 +1,18 @@
+version: '3'
+services:
+  #  back:
+  #    build:
+  #      context: ./
+  #      dockerfile: Dockerfile
+  #    ports:
+  #      - "8080:8080"
+  db:
+    image: postgres
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "followupDB"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "Wajdi12345&"

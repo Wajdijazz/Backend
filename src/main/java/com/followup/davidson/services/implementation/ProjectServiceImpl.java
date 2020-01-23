@@ -1,5 +1,6 @@
 package com.followup.davidson.services.implementation;
 
+import com.followup.davidson.model.Client;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.IProjectService;
@@ -26,7 +27,7 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
     @Override
-    public Project create(Project project) {
+    public Project create(Project project){
         return projectRepository.save(project);
     }
 

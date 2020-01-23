@@ -31,7 +31,7 @@ public class Person {
 
 
 
-    @OneToMany(mappedBy = "person",  fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person",  fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<TJ> TJs;
 
     @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

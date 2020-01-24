@@ -2,6 +2,7 @@ package com.followup.davidson.services.implementation;
 
 import com.followup.davidson.model.Client;
 import com.followup.davidson.model.Project;
+import com.followup.davidson.repositories.ClientRepository;
 import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class ProjectServiceImpl implements IProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
+    @Autowired
+    private ClientRepository clientRepository;
 
     @Override
     public List<Project> findAll() {
@@ -27,7 +30,7 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
     @Override
-    public Project create(Project project){
+    public Project create(Project project ){
         return projectRepository.save(project);
     }
 

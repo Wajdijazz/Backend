@@ -9,6 +9,6 @@ public interface IProjectService {
 
     List<Project> findAll();
     Project findById(Long id);
-    Project create(Project project);
+    Project create(Project project );
     void deleteProject(Long id);
 }

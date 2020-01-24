@@ -8,6 +8,7 @@ public interface IClientService {
 
     List<Client> findAll();
     Client findById(Long id);
+
     Client create(Client client);
     void deleteClient(Long id);
 }

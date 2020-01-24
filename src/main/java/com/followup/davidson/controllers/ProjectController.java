@@ -26,8 +26,9 @@ public class ProjectController {
 
 
     @PostMapping("/")
-    public Project createProject(@Valid @RequestBody Project project) {
-        return projectService.create(project);
+    public Project createProject(@Valid @RequestBody Project project , String clientName) {
+        return projectService.create(project );
+
     }
 
     @GetMapping("/{id}")

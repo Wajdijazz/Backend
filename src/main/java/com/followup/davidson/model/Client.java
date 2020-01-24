@@ -22,12 +22,7 @@ public class Client {
 
     private String clientName;
 
-
     private String clientContact;
-
-
-
-
 
 
     @OneToMany(mappedBy="client", cascade = CascadeType.ALL, fetch=FetchType.LAZY)

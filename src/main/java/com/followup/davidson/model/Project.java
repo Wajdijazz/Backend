@@ -1,5 +1,7 @@
 package com.followup.davidson.model;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Getter @Setter
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,13 +25,11 @@ public class Project {
     @NotEmpty
     private String projectName;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToMany(mappedBy = "project",  cascade = CascadeType.ALL)
-    private List<TJ> TJs;
+
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Intervention> interventions;

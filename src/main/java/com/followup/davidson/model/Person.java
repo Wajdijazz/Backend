@@ -1,6 +1,7 @@
 package com.followup.davidson.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,10 +32,12 @@ public class Person {
 
 
 
-    @OneToMany(mappedBy = "person",  fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<TJ> TJs;
-
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
     private List<Intervention> interventions;
+
+//    @ManyToOne
+//    @JoinColumn(name="manager_id")
+//    @JsonIgnore
+//    private Manager manager;
 
 }

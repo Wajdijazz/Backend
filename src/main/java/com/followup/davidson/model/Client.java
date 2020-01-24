@@ -1,6 +1,7 @@
 package com.followup.davidson.model;
 
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Setter @Getter
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +27,5 @@ public class Client {
     private String clientContact;
 
 
-    @OneToMany(mappedBy="client", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-    private List<Project> projects;
+
 }

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
 @Table(name="manager")
@@ -24,6 +25,8 @@ public class Manager {
     @NotEmpty
     private String lastName;
 
+//    @OneToMany(mappedBy = "manager",  fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Person> persons;
 
 
 }

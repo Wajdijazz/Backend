@@ -1,8 +1,5 @@
 package com.followup.davidson.model;
-
-
-
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,14 +17,16 @@ public class TJ {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String  tarif;
+    private double  tarif;
 
     @ManyToOne
     @JoinColumn(name="person_id")
+
     private Person person;
 
     @ManyToOne
     @JoinColumn(name="project_id")
+
     private Project project;
 
 }

@@ -12,7 +12,8 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(Routes.PROJECT)
+@RequestMapping(Routes.PROJECT  )
+
 public class ProjectController {
 
     @Autowired
@@ -21,14 +22,14 @@ public class ProjectController {
     @Autowired
     private ClientRepository clientRepository;
 
-    @GetMapping("/")
+    @GetMapping( value = "/", produces = { "application/json" })
     public List<Project> getAllProject() {
         return projectService.findAll();
     }
 
 
     @PostMapping("/")
-    public Project createProject(@Valid @RequestBody Project project, String clientName) {
+    public Project createProject(@Valid @RequestBody Project project) {
         return projectService.create(project);
     }
 

@@ -1,4 +1,5 @@
 package com.followup.davidson.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Project {
     private String projectName;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonIgnore
     @JoinColumn(name = "client_id")
     private Client client;
 
@@ -30,4 +32,6 @@ public class Project {
 
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Intervention> interventions;
+
+
 }

@@ -11,8 +11,12 @@ import java.util.List;
 @Transactional
 @Service
 public class TJServiceImpl  implements ITJService {
-    @Autowired
     private TJRepository tjRepository;
+
+    public TJServiceImpl(TJRepository tjRepository) {
+        this.tjRepository=tjRepository;
+    }
+
     @Override
     public List<TJ> findAll() {
         return tjRepository.findAll();

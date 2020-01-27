@@ -15,9 +15,12 @@ import java.util.List;
 @RequestMapping(Routes.CLIENT)
 public class ClientController {
 
-
-    @Autowired
     private IClientService clientService;
+
+    public ClientController(IClientService clientService) {
+        this.clientService=clientService;
+    }
+
     @GetMapping("/")
     public List<Client> getAllClient() {
         return clientService.findAll();

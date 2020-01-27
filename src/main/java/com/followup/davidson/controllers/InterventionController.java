@@ -15,8 +15,14 @@ import java.util.List;
 @RequestMapping(Routes.INTERVENTION)
 public class InterventionController {
 
-    @Autowired
+
     private IInterventionService interventionService;
+
+    public InterventionController(IInterventionService interventionService ) {
+
+        this.interventionService=interventionService;
+    }
+
     @GetMapping("/")
     public List<Intervention> getAllIntervention() {
         return interventionService.findAll();
@@ -25,6 +31,7 @@ public class InterventionController {
 
     @PostMapping("/")
     public Intervention createIntervention(@Valid @RequestBody Intervention intervention) {
+
         return interventionService.create(intervention);
     }
 

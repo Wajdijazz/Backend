@@ -16,11 +16,14 @@ import java.util.List;
 
 public class ProjectController {
 
-    @Autowired
     private IProjectService projectService;
 
-    @Autowired
     private ClientRepository clientRepository;
+
+    public ProjectController(IProjectService projectService ,ClientRepository clientRepository) {
+        this.projectService=projectService;
+        this.clientRepository=clientRepository;
+    }
 
     @GetMapping( value = "/", produces = { "application/json" })
     public List<Project> getAllProject() {

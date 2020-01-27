@@ -3,6 +3,7 @@ package com.followup.davidson.model;
 
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,9 +26,12 @@ public class Intervention {
     private Long interventionId;
 
     @Column(name ="startDate")
-    private Date startdate;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date startDate;
+
 
     @Column(name ="endDate")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date endDate;
 
     private long worked;

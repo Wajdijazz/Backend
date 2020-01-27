@@ -35,8 +35,6 @@ public class Person {
 
 
 
-   @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
-    private List<Intervention> interventions;
 
    @ManyToOne
    @JoinColumn(name="manager_id")

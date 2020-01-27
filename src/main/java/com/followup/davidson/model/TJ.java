@@ -18,7 +18,8 @@ import javax.persistence.*;
 public class TJ {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long tjId;
+
     private double  tarif;
 
     @ManyToOne
@@ -30,7 +31,6 @@ public class TJ {
     @ManyToOne
     @JoinColumn(name="project_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-
     private Project project;
 
 }

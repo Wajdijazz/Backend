@@ -28,11 +28,6 @@ public class ProjectController {
     }
 
 
-    @PostMapping("/")
-    public Project createProject(@Valid @RequestBody Project project) {
-        return projectService.create(project);
-    }
-
     @PostMapping("/client/{clientId}/project")
     public Project createProject(@Valid @RequestBody Project project, @PathVariable(value = "clientId") Long clientId) {
         return clientRepository.findById(clientId).map(client -> {

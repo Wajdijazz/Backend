@@ -1,8 +1,11 @@
 package com.followup.davidson.model;
 
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -17,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 @Getter @Setter
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Person {
 
     @Id
@@ -35,9 +39,9 @@ public class Person {
    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
     private List<Intervention> interventions;
 
-//    @ManyToOne
-//    @JoinColumn(name="manager_id")
-//    @JsonIgnore
-//    private Manager manager;
+   @ManyToOne
+   @JoinColumn(name="manager_id")
+   @OnDelete(action = OnDeleteAction.CASCADE)
+  private Manager manager;
 
 }

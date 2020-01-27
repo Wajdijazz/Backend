@@ -59,11 +59,16 @@ public class InterventionServiceImpl implements IInterventionService {
             if ((Calendar.SATURDAY != cal1.get(Calendar.DAY_OF_WEEK))
                     &&(Calendar.SUNDAY != cal1.get(Calendar.DAY_OF_WEEK))) {
                 numberOfDays++;
+                Date date = cal1.getTime();
+                System.out.println(date);
             }
             cal1.add(Calendar.DATE,1);
         }
+
         System.out.println(numberOfDays);
         intervention.setWorked(numberOfDays);
+
+
     }
 
 

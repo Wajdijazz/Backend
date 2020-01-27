@@ -1,4 +1,5 @@
 package com.followup.davidson.model;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
@@ -15,10 +16,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @Getter @Setter
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class TJ {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long tjId;
     private double  tarif;
 
     @ManyToOne

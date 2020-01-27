@@ -17,14 +17,14 @@ import java.util.List;
 @RequestMapping(Routes.PERSON)
 @CrossOrigin(origins = "*")
 public class PersonController {
-    @Autowired
     private IPersonService personService;
 
-    @Autowired
     private ManagerRepository managerRepository;
 
-
-
+    public PersonController(IPersonService personService,ManagerRepository managerRepository) {
+        this.personService=personService;
+        this.managerRepository=managerRepository;
+    }
 
     @GetMapping( value = "/", produces = { "application/json" })
     public List<Person> getAllPerson() {

@@ -13,9 +13,12 @@ import java.util.List;
 @Service
 public class ManagerServiceImpl implements IManagerService {
 
-    @Autowired
+
     private ManagerRepository managerRepository;
 
+    public ManagerServiceImpl( ManagerRepository managerRepository) {
+        this.managerRepository=managerRepository;
+    }
 
     @Override
     public List<Manager> findAll() {

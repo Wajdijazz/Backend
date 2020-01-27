@@ -11,9 +11,12 @@ import java.util.List;
 @Transactional
 @Service
 public class ClientServiceImpl implements IClientService {
-    @Autowired
+
     private ClientRepository clientRepository;
 
+    public ClientServiceImpl(ClientRepository clientRepository) {
+        this.clientRepository=clientRepository;
+    }
 
     @Override
     public List<Client> findAll() {

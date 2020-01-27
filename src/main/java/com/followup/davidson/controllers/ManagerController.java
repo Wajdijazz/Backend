@@ -16,8 +16,11 @@ import java.util.List;
 @RequestMapping(Routes.Manger)
 public class ManagerController {
 
-    @Autowired
     private IManagerService managerService;
+
+    public ManagerController(IManagerService managerService) {
+        this.managerService=managerService;
+    }
 
     @GetMapping("/")
     public List<Manager> getAllManager() {

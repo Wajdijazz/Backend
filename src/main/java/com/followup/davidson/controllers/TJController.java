@@ -21,14 +21,16 @@ import java.util.List;
 public class TJController {
 
 
-    @Autowired
+
     private ITJService tjService;
-
-    @Autowired
     private ProjectRepository projectRepository;
-
-    @Autowired
     private PersonRepository personRepository;
+
+    public TJController(  ITJService tjService ,ProjectRepository projectRepository,PersonRepository personRepository) {
+        this.tjService=tjService;
+        this.projectRepository=projectRepository;
+        this.personRepository=personRepository;
+    }
 
     @GetMapping("/")
     public List<TJ> getTj() {

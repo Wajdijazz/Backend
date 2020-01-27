@@ -14,11 +14,14 @@ import java.util.List;
 @Service
 public class ProjectServiceImpl implements IProjectService {
 
-    @Autowired
+
     private ProjectRepository projectRepository;
 
-    @Autowired
-    private ClientRepository clientRepository;
+
+
+    public ProjectServiceImpl(ProjectRepository projectRepository) {
+        this.projectRepository=projectRepository;
+    }
 
     @Override
     public List<Project> findAll() {

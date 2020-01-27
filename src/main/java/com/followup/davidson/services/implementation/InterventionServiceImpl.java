@@ -12,8 +12,11 @@ import java.util.List;
 @Service
 public class InterventionServiceImpl implements IInterventionService {
 
-    @Autowired
     InterventionRepository interventionRepository;
+
+    public InterventionServiceImpl(  InterventionRepository interventionRepository) {
+        this.interventionRepository=interventionRepository;
+    }
 
     @Override
     public List<Intervention> findAll() {

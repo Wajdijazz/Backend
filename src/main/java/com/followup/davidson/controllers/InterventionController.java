@@ -3,8 +3,13 @@ package com.followup.davidson.controllers;
 
 import com.followup.davidson.Routes;
 import com.followup.davidson.model.Intervention;
+import com.followup.davidson.model.TJ;
+import com.followup.davidson.repositories.PersonRepository;
+import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.IInterventionService;
+import com.followup.davidson.services.ITJService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,8 +23,13 @@ public class InterventionController {
 
     private IInterventionService interventionService;
 
-    public InterventionController(IInterventionService interventionService ) {
+    private ProjectRepository projectRepository;
+    private PersonRepository personRepository;
 
+
+    public InterventionController(IInterventionService interventionService ,ProjectRepository projectRepository, PersonRepository personRepository ) {
+        this.projectRepository=projectRepository;
+        this.personRepository=personRepository;
         this.interventionService=interventionService;
     }
 
@@ -29,10 +39,18 @@ public class InterventionController {
     }
 
 
-    @PostMapping("/")
-    public Intervention createIntervention(@Valid @RequestBody Intervention intervention) {
 
-        return interventionService.create(intervention);
+    @PostMapping("/project/{projectId}/person/{personId}")
+    public Intervention createIntervention(@Valid @RequestBody Intervention intervention, @PathVariable(value = "projectId") Long projectId , @PathVariable(value = "personId") Long personId) {
+        return projectRepository.findById(projectId).map(project -> {
+            intervention.setProject(project);
+            personRepository.findById(personId).map(person -> {
+                        intervention.setPerson(person);
+                        return interventionService.create(intervention);
+                    }
+            );
+            return intervention; }).orElseThrow(() -> new ResourceNotFoundException("PersonId " + personId + " not found"));
+
     }
 
     @GetMapping("/{id}")

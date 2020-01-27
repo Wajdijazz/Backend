@@ -10,4 +10,5 @@ public interface IInterventionService {
     Intervention create(Intervention intervention);
     Intervention findById(Long id);
     void deleteIntervention(Long id);
+    void workedDay(Intervention intervention);
 }

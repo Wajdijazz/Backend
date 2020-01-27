@@ -26,13 +26,13 @@ public class Intervention {
     private Date startdate;
 
     @Column(name ="endDate")
-
     private Date endDate;
 
 
     private long worked;
     @ManyToOne
     @JoinColumn(name = "person_id")
+
     private Person person;
     @ManyToOne
     @JoinColumn(name = "project_id")

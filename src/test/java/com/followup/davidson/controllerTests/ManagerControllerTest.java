@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Optional;
 
 
-import static java.util.Optional.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.lenient;
@@ -33,7 +32,6 @@ import static org.mockito.Mockito.lenient;
 public class ManagerControllerTest {
     private static Manager m1;
     private static Manager m2;
-    private static Manager m3;
 
     @Mock
     private IManagerService managerService;
@@ -49,7 +47,6 @@ public class ManagerControllerTest {
     public static void init() {
         m1=new Manager(1L,"Wajdi","Jaziri");
         m2=new Manager(2L,"test","test");
-        m3=new Manager(3L,"Davidson","Davidson");
     }
 
 

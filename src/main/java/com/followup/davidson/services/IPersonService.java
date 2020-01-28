@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface IPersonService {
 
     List<Person> findAll();
-    Person create(Person person);
+    Person create(Person person,Long managerId);
     Optional<Person> findById(Long id);
     void deletePerson(Long id);
 }

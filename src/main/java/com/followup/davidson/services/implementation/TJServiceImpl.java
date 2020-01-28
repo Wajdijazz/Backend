@@ -3,11 +3,12 @@ package com.followup.davidson.services.implementation;
 import com.followup.davidson.model.TJ;
 import com.followup.davidson.repositories.TJRepository;
 import com.followup.davidson.services.ITJService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+
 @Transactional
 @Service
 public class TJServiceImpl  implements ITJService {
@@ -28,8 +29,8 @@ public class TJServiceImpl  implements ITJService {
         return tjRepository.save(tj);    }
 
     @Override
-    public TJ findById(Long id) {
-        return tjRepository.findById(id).orElse(new TJ());
+    public Optional<TJ> findById(Long id) {
+        return tjRepository.findById(id);
     }
 
     @Override

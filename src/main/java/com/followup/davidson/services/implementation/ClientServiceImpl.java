@@ -3,11 +3,12 @@ package com.followup.davidson.services.implementation;
 import com.followup.davidson.model.Client;
 import com.followup.davidson.repositories.ClientRepository;
 import com.followup.davidson.services.IClientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+
 @Transactional
 @Service
 public class ClientServiceImpl implements IClientService {
@@ -23,8 +24,8 @@ public class ClientServiceImpl implements IClientService {
         return clientRepository.findAll();    }
 
     @Override
-    public Client findById(Long id) {
-        return clientRepository.findById(id).orElse(new Client());
+    public Optional<Client> findById(Long id) {
+        return clientRepository.findById(id);
     }
 
 

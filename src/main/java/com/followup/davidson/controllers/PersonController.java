@@ -3,15 +3,14 @@ package com.followup.davidson.controllers;
 
 import com.followup.davidson.Routes;
 import com.followup.davidson.model.Person;
-import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.ManagerRepository;
 import com.followup.davidson.services.IPersonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(Routes.PERSON)
@@ -42,7 +41,7 @@ public class PersonController {
 }
 
     @GetMapping("/{id}")
-    public Person findPersonById(@PathVariable(value = "id") Long personId)
+    public Optional<Person> findPersonById(@PathVariable(value = "id") Long personId)
     {
         return personService.findById(personId);
 

@@ -3,17 +3,15 @@ package com.followup.davidson.controllers;
 
 import com.followup.davidson.Routes;
 import com.followup.davidson.model.Intervention;
-import com.followup.davidson.model.TJ;
 import com.followup.davidson.repositories.PersonRepository;
 import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.IInterventionService;
-import com.followup.davidson.services.ITJService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -54,7 +52,7 @@ public class InterventionController {
     }
 
     @GetMapping("/{id}")
-    public Intervention findInterventionById(@PathVariable(value = "id") Long interventionId)
+    public Optional<Intervention> findInterventionById(@PathVariable(value = "id") Long interventionId)
     {
         return interventionService.findById(interventionId);
 

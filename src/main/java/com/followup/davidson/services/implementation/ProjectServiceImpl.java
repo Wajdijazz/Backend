@@ -1,15 +1,14 @@
 package com.followup.davidson.services.implementation;
 
-import com.followup.davidson.model.Client;
 import com.followup.davidson.model.Project;
-import com.followup.davidson.repositories.ClientRepository;
 import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.IProjectService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+
 @Transactional
 @Service
 public class ProjectServiceImpl implements IProjectService {
@@ -28,8 +27,8 @@ public class ProjectServiceImpl implements IProjectService {
         return  projectRepository.findAll();    }
 
     @Override
-    public Project findById(Long id) {
-        return projectRepository.findById(id).orElse(new Project());
+    public Optional<Project> findById(Long id) {
+        return projectRepository.findById(id);
     }
 
     @Override

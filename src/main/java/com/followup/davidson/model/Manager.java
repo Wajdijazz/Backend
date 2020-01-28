@@ -20,7 +20,7 @@ public class Manager {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="manager_id")
-    private Long managerId;
+    private  Long managerId;
     @NotEmpty
     private String firstName;
     @NotEmpty

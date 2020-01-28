@@ -2,19 +2,17 @@ package com.followup.davidson.controllers;
 
 
 import com.followup.davidson.Routes;
-import com.followup.davidson.model.Project;
 import com.followup.davidson.model.TJ;
 import com.followup.davidson.repositories.PersonRepository;
 import com.followup.davidson.repositories.ProjectRepository;
-import com.followup.davidson.services.IPersonService;
-import com.followup.davidson.services.IProjectService;
 import com.followup.davidson.services.ITJService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(Routes.TJ)
@@ -53,7 +51,7 @@ public class TJController {
 
     }
     @GetMapping("/{id}")
-    public TJ findTjById(@PathVariable(value = "id") Long tjId) {
+    public Optional<TJ> findTjById(@PathVariable(value = "id") Long tjId) {
         return tjService.findById(tjId);
     }
 

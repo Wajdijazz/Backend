@@ -3,12 +3,12 @@ import com.followup.davidson.Routes;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.ClientRepository;
 import com.followup.davidson.services.IProjectService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -36,12 +36,12 @@ public class ProjectController {
         return clientRepository.findById(clientId).map(client -> {
             project.setClient(client);
             return projectService.create(project);
-        }).orElseThrow(() -> new ResourceNotFoundException("PostId " + clientId + " not found"));
+        }).orElseThrow(() -> new ResourceNotFoundException("clientId " + clientId + " not found"));
 
     }
 
     @GetMapping("/{id}")
-    public Project findProjectById(@PathVariable(value = "id") Long projectId) {
+    public Optional<Project> findProjectById(@PathVariable(value = "id") Long projectId) {
         return projectService.findById(projectId);
 
     }

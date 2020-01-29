@@ -1,10 +1,11 @@
 package com.followup.davidson.servicesTests;
 
-import com.followup.davidson.model.Person;
+import com.followup.davidson.controllers.ClientController;
+import com.followup.davidson.model.Client;
+
 import com.followup.davidson.model.Project;
-import com.followup.davidson.repositories.PersonRepository;
 import com.followup.davidson.repositories.ProjectRepository;
-import com.followup.davidson.services.implementation.PersonServiceImpl;
+import com.followup.davidson.services.implementation.ClientServiceImpl;
 import com.followup.davidson.services.implementation.ProjectServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
@@ -28,6 +29,8 @@ import static org.hamcrest.Matchers.is;
 public class ProjectServiceTest {
     private static Project p1;
     private static Project p2;
+    private static Client c1;
+
 
     @Mock
     private ProjectRepository projectRepository;
@@ -35,6 +38,12 @@ public class ProjectServiceTest {
     @InjectMocks
 
     private ProjectServiceImpl projectService;
+    @InjectMocks
+
+    private ClientServiceImpl clientService;
+    @InjectMocks
+    private ClientController clientController;
+
 
     @Before
     public void setUp() {
@@ -45,6 +54,8 @@ public class ProjectServiceTest {
     public static void init() {
         p1=new Project(1L,"Followup",null);
         p2=new Project(1L,"ERP",null);
+        c1=new Client(1L,"Decathlon","decathlon@gmail.com");
+
 
     }
     @Test
@@ -82,13 +93,16 @@ public class ProjectServiceTest {
 
     @Test
     void create() {
+        Mockito.when(clientService.findById(1L)).thenReturn(Optional.of(c1));
+        Optional<Client> c = clientController.findClientById(1L);
+        assertThat(c.get(), is(c1) );
 
         Mockito.when(projectRepository.save(p1)).thenReturn(p1);
-        assertThat(projectService.create(p1), is(p1));
+        assertThat(projectService.create(p1,1L), is(p1));
         Mockito.verify(projectRepository, Mockito.times(1)).save(p1);
 
         Mockito.when(projectRepository.save(p2)).thenReturn(p2);
-        assertThat(projectService.create(p2), is(p2));
+        assertThat(projectService.create(p2,1L), is(p2));
         Mockito.verify(projectRepository, Mockito.times(1)).save(p2);
     }
 }

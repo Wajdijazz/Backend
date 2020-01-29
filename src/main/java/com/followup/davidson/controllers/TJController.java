@@ -40,14 +40,7 @@ public class TJController {
 
     @PostMapping("/project/{projectId}/person/{personId}")
     public TJ createTj(@Valid @RequestBody TJ tj, @PathVariable(value = "projectId") Long projectId , @PathVariable(value = "personId") Long personId) {
-        return projectRepository.findById(projectId).map(project -> {
-            tj.setProject(project);
-             personRepository.findById(personId).map(person -> {
-                tj.setPerson(person);
-                         return tjService.create(tj);
-            }
-                );
-       return tj; }).orElseThrow(() -> new ResourceNotFoundException("PostId " + personId + " not found"));
+ return tjService.create(tj,projectId,personId);
 
     }
     @GetMapping("/{id}")

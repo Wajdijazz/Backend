@@ -33,10 +33,7 @@ public class ProjectController {
 
     @PostMapping("/client/{clientId}/project")
     public Project createProject(@Valid @RequestBody Project project, @PathVariable(value = "clientId") Long clientId) {
-        return clientRepository.findById(clientId).map(client -> {
-            project.setClient(client);
-            return projectService.create(project);
-        }).orElseThrow(() -> new ResourceNotFoundException("clientId " + clientId + " not found"));
+    return projectService.create(project,clientId);
 
     }
 

@@ -1,7 +1,10 @@
 package com.followup.davidson.services.implementation;
 
+import com.followup.davidson.model.Client;
+import com.followup.davidson.model.Manager;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.ProjectRepository;
+import com.followup.davidson.services.IClientService;
 import com.followup.davidson.services.IProjectService;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +18,13 @@ public class ProjectServiceImpl implements IProjectService {
 
 
     private ProjectRepository projectRepository;
+    private IClientService clientService;
 
 
 
-    public ProjectServiceImpl(ProjectRepository projectRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository,IClientService clientService) {
         this.projectRepository=projectRepository;
+        this.clientService=clientService;
     }
 
     @Override
@@ -32,7 +37,11 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
     @Override
-
+    public Project create(Project project, Long clientId) {
+        Optional<Client> client= clientService.findById(clientId);
+        project.setClient(client.get());
+        return projectRepository.save(project);
+    }
 
 
     public Project create(Project project){

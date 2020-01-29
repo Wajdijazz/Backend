@@ -3,6 +3,7 @@ package com.followup.davidson.controllerTests;
 
 import com.followup.davidson.controllers.ProjectController;
 
+import com.followup.davidson.model.Person;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.services.IProjectService;
 import org.junit.Before;
@@ -79,6 +80,15 @@ public class ProjectControllerTest {
         Mockito.verify(projectService, Mockito.times(1)).deleteProject(1L);
 
     }
+
+    @Test
+    void create() {
+
+        Project p= projectController.createProject(p1,1L);
+        Mockito.verify(projectService, Mockito.times(1)).create(p1,1L);
+
+    }
+
 
 
 }

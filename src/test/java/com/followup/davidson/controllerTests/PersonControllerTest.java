@@ -1,12 +1,9 @@
 package com.followup.davidson.controllerTests;
 
 
-import com.followup.davidson.controllers.ManagerController;
 import com.followup.davidson.controllers.PersonController;
 import com.followup.davidson.model.Manager;
 import com.followup.davidson.model.Person;
-import com.followup.davidson.repositories.ManagerRepository;
-import com.followup.davidson.services.IManagerService;
 import com.followup.davidson.services.IPersonService;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
@@ -39,7 +36,6 @@ public class PersonControllerTest {
 
     @Mock
     private IPersonService personService;
-
     @InjectMocks
     private PersonController personController;
 

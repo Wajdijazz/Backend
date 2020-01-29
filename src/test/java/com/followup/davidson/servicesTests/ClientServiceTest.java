@@ -2,11 +2,8 @@ package com.followup.davidson.servicesTests;
 
 
 import com.followup.davidson.model.Client;
-import com.followup.davidson.model.Person;
 import com.followup.davidson.repositories.ClientRepository;
-import com.followup.davidson.repositories.PersonRepository;
 import com.followup.davidson.services.implementation.ClientServiceImpl;
-import com.followup.davidson.services.implementation.PersonServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

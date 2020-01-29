@@ -1,7 +1,6 @@
 package com.followup.davidson.services.implementation;
 
 import com.followup.davidson.model.Client;
-import com.followup.davidson.model.Manager;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.IClientService;
@@ -44,9 +43,6 @@ public class ProjectServiceImpl implements IProjectService {
     }
 
 
-    public Project create(Project project){
-        return projectRepository.save(project);
-    }
 
     @Override
     public void deleteProject(Long id) {

@@ -41,14 +41,14 @@ public class TjServiceTest {
 
     private TJServiceImpl tjService;
 
-    @InjectMocks
+    @Mock
 
     private ProjectServiceImpl projectService;
 
     @InjectMocks
     private ProjectController projectController;
 
-    @InjectMocks
+    @Mock
 
     private PersonServiceImpl personService;
 

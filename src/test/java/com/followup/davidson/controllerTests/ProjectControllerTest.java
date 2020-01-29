@@ -3,7 +3,6 @@ package com.followup.davidson.controllerTests;
 
 import com.followup.davidson.controllers.ProjectController;
 
-import com.followup.davidson.model.Person;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.services.IProjectService;
 import org.junit.Before;

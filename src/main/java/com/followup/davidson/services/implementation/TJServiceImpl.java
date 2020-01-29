@@ -1,6 +1,5 @@
 package com.followup.davidson.services.implementation;
 
-import com.followup.davidson.model.Client;
 import com.followup.davidson.model.Person;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.model.TJ;

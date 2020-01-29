@@ -2,12 +2,9 @@ package com.followup.davidson.controllers;
 
 
 import com.followup.davidson.Routes;
-import com.followup.davidson.model.Manager;
 import com.followup.davidson.model.Person;
-import com.followup.davidson.repositories.ManagerRepository;
 import com.followup.davidson.services.IManagerService;
 import com.followup.davidson.services.IPersonService;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

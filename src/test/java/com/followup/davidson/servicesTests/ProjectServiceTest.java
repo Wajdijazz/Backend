@@ -34,12 +34,9 @@ public class ProjectServiceTest {
 
     @Mock
     private ProjectRepository projectRepository;
-
     @InjectMocks
-
     private ProjectServiceImpl projectService;
-    @InjectMocks
-
+    @Mock
     private ClientServiceImpl clientService;
     @InjectMocks
     private ClientController clientController;

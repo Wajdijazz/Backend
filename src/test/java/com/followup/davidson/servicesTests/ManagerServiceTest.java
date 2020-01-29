@@ -3,7 +3,6 @@ package com.followup.davidson.servicesTests;
 
 import com.followup.davidson.model.Manager;
 import com.followup.davidson.repositories.ManagerRepository;
-import com.followup.davidson.services.IManagerService;
 import com.followup.davidson.services.implementation.ManagerServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;

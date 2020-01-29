@@ -3,7 +3,6 @@ import com.followup.davidson.Routes;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.ClientRepository;
 import com.followup.davidson.services.IProjectService;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;

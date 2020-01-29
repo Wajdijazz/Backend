@@ -2,7 +2,6 @@ package com.followup.davidson.services.implementation;
 
 import com.followup.davidson.model.Manager;
 import com.followup.davidson.model.Person;
-import com.followup.davidson.repositories.ManagerRepository;
 import com.followup.davidson.repositories.PersonRepository;
 import com.followup.davidson.services.IManagerService;
 import com.followup.davidson.services.IPersonService;

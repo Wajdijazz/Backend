@@ -6,7 +6,6 @@ import com.followup.davidson.model.TJ;
 import com.followup.davidson.repositories.PersonRepository;
 import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.ITJService;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,7 +30,7 @@ public class TJController {
     }
 
     @GetMapping("/")
-    public List<TJ> getTj() {
+    public List<TJ> getAllTj() {
         return tjService.findAll();
     }
 

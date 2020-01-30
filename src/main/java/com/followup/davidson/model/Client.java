@@ -19,14 +19,23 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+
+/**
+ * Client est la classe represetant un client chez Davidson
+ */
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="client_id")
     private Long clientId;
-
+    /**
+     * lientName presente le nom de l'entreprise ou l organisme
+     */
     private String clientName;
 
+    /**
+     *  clientContact presente le contact pricipal du client
+     */
     private String clientContact;
 
 

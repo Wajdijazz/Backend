@@ -40,6 +40,16 @@ public class InterventionServiceImpl implements IInterventionService {
         return interventionRepository.findById(id).orElse(new Intervention());
     }
 
+
+    /**
+     * cette methode permet de sauvgarder lhistorique des interventions d'une personne sur un projet par details , les weekend sont
+     * automatiquement eliminés
+     * elle prend en paramatre , date de debut des interventions et date de fins des interventions
+     * @param firstDate
+     * @param secondDate
+     * @param person
+     * @param project
+     */
     @Override
     public void saveInterventions(Date firstDate, Date secondDate , Person person , Project project) {
         Calendar cal1 = Calendar.getInstance();

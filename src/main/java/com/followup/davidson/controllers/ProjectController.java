@@ -2,6 +2,7 @@ package com.followup.davidson.controllers;
 import com.followup.davidson.Routes;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.ClientRepository;
+import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.IProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -20,9 +21,12 @@ public class ProjectController {
 
     private ClientRepository clientRepository;
 
-    public ProjectController(IProjectService projectService ,ClientRepository clientRepository) {
+    private ProjectRepository projectRepository;
+
+    public ProjectController(IProjectService projectService ,ClientRepository clientRepository , ProjectRepository projectRepository) {
         this.projectService=projectService;
         this.clientRepository=clientRepository;
+        this.projectRepository=projectRepository;
     }
 
     @GetMapping( value = "/", produces = { "application/json" })
@@ -49,6 +53,12 @@ public class ProjectController {
     @DeleteMapping("/{id}")
     public void deletePeroject(@PathVariable(value = "id") Long projectId) {
         projectService.deleteProject(projectId);
+    }
+
+    @GetMapping("/active")
+    long getActiveProjects() {
+        return projectRepository.getActiveProjects();
+
     }
 
 }

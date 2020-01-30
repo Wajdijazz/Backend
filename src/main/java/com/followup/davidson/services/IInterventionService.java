@@ -15,5 +15,7 @@ public interface IInterventionService {
 
     void saveInterventions(Date firstDate , Date secondDate , Person person , Project project);
     void deleteIntervention(Long personId,Long projectId);
-   // void workedDay(Intervention intervention);
+    void deleteInterventionHistorique(Long id);
+
+    // void workedDay(Intervention intervention);
 }

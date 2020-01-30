@@ -54,8 +54,11 @@ public interface InterventionRepository  extends JpaRepository<Intervention,Long
 
 
 
-
-
+    /**
+     *cette methode permet de supprimer les interventions par personId et par projectId
+     * @param personId
+     * @param projectId
+     */
     @Modifying
     @Query(value=" DELETE FROM intervention i WHERE i.person_id= :personId AND i.project_id= :projectId",nativeQuery = true)
     void deleteIntervention( @Param("personId") Long personId,@Param("projectId") Long projectId);

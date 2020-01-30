@@ -26,7 +26,7 @@ public class Client {
     @Column(name="client_id")
     private Long clientId;
     /**
-     * lientName presente le nom de l'entreprise ou l organisme
+     * clientName presente le nom de l'entreprise ou l organisme
      */
     private String clientName;
 

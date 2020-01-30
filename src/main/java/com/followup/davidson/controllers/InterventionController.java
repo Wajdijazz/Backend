@@ -87,6 +87,11 @@ public class InterventionController {
     {
         interventionService.deleteIntervention(personId,projectId);
     }
+    @DeleteMapping("/{id}")
+    public void deleteIntervention(@PathVariable(value = "id") Long id)
+    {
+        interventionService.deleteInterventionHistorique(id);
+    }
 
 
 

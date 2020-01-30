@@ -18,6 +18,9 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @ToString
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+/**
+ * Person est la classe represetant un consultant chez Davidson
+ */
 public class Person {
 
     @Id
@@ -25,14 +28,21 @@ public class Person {
     @Column(name="person_id")
 
     private Long personId;
-
+    /**
+     * firstName presente le nom de consultant
+     */
     @NotEmpty
     private String firstName;
+    /**
+     * firstName presente le prénom de consultant
+     */
     @NotEmpty
     private String lastName;
 
 
-
+    /**
+     * manager presente le manager de chaque consultant
+     */
 
    @ManyToOne
    @JoinColumn(name="manager_id")

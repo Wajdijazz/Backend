@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.*;
 
-import java.util.stream.Collectors;
-
 @Transactional
 @Service
 public class InterventionServiceImpl implements IInterventionService {
@@ -103,10 +101,10 @@ public class InterventionServiceImpl implements IInterventionService {
 
     }
 
-
-
-
-
+    @Override
+    public void deleteInterventionHistorique(Long id) {
+        interventionRepository.deleteById(id);
+    }
 
 
 }

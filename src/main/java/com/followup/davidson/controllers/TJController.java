@@ -18,15 +18,14 @@ import java.util.Optional;
 public class TJController {
 
 
-
     private ITJService tjService;
     private ProjectRepository projectRepository;
     private PersonRepository personRepository;
 
-    public TJController(  ITJService tjService ,ProjectRepository projectRepository,PersonRepository personRepository) {
-        this.tjService=tjService;
-        this.projectRepository=projectRepository;
-        this.personRepository=personRepository;
+    public TJController(ITJService tjService, ProjectRepository projectRepository, PersonRepository personRepository) {
+        this.tjService = tjService;
+        this.projectRepository = projectRepository;
+        this.personRepository = personRepository;
     }
 
     @GetMapping("/")
@@ -34,14 +33,11 @@ public class TJController {
         return tjService.findAll();
     }
 
-
-
-
     @PostMapping("/project/{projectId}/person/{personId}")
-    public TJ createTj(@Valid @RequestBody TJ tj, @PathVariable(value = "projectId") Long projectId , @PathVariable(value = "personId") Long personId) {
- return tjService.create(tj,projectId,personId);
-
+    public TJ createTj(@Valid @RequestBody TJ tj, @PathVariable(value = "projectId") Long projectId, @PathVariable(value = "personId") Long personId) {
+        return tjService.create(tj, projectId, personId);
     }
+
     @GetMapping("/{id}")
     public Optional<TJ> findTjById(@PathVariable(value = "id") Long tjId) {
         return tjService.findById(tjId);
@@ -50,6 +46,5 @@ public class TJController {
     @DeleteMapping("/{id}")
     public void deleteTj(@PathVariable(value = "id") Long tjId) {
         tjService.deleteTj(tjId);
-
     }
 }

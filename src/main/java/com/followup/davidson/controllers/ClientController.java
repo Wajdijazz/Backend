@@ -18,7 +18,7 @@ public class ClientController {
     private IClientService clientService;
 
     public ClientController(IClientService clientService) {
-        this.clientService=clientService;
+        this.clientService = clientService;
     }
 
     @GetMapping("/")
@@ -33,14 +33,13 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Client> findClientById(@PathVariable(value = "id") Long clientId)
-    {
+    public Optional<Client> findClientById(@PathVariable(value = "id") Long clientId) {
         return clientService.findById(clientId);
 
     }
+
     @DeleteMapping("/{id}")
-    public void deleteClient(@PathVariable(value = "id") Long clientId)
-    {
+    public void deleteClient(@PathVariable(value = "id") Long clientId) {
         clientService.deleteClient(clientId);
     }
 

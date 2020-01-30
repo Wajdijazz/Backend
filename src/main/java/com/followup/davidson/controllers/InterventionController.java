@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,11 +35,11 @@ public class InterventionController {
     private InterventionRepository interventionRepository;
 
 
-    public InterventionController(IInterventionService interventionService ,ProjectRepository projectRepository, PersonRepository personRepository ,InterventionRepository interventionRepository) {
-        this.projectRepository=projectRepository;
-        this.personRepository=personRepository;
-        this.interventionRepository=interventionRepository;
-        this.interventionService=interventionService;
+    public InterventionController(IInterventionService interventionService, ProjectRepository projectRepository, PersonRepository personRepository, InterventionRepository interventionRepository) {
+        this.projectRepository = projectRepository;
+        this.personRepository = personRepository;
+        this.interventionRepository = interventionRepository;
+        this.interventionService = interventionService;
     }
 
     @GetMapping("/")
@@ -47,59 +48,60 @@ public class InterventionController {
     }
 
 
-
     @PostMapping("/project/{projectId}/person/{personId}")
-    public Object createIntervention(@Valid @RequestBody InterventionForm interventionForm, @PathVariable(value = "projectId") Long projectId , @PathVariable(value = "personId") Long personId) {
-        System.out.println(interventionForm );
+    public Object createIntervention(@Valid @RequestBody InterventionForm interventionForm, @PathVariable(value = "projectId") Long projectId
+            , @PathVariable(value = "personId") Long personId) {
+        System.out.println(interventionForm);
         return projectRepository.findById(projectId).map(project -> {
             interventionForm.setProject(project);
             personRepository.findById(personId).map(person -> {
                         interventionForm.setPerson(person);
-                        interventionService.saveInterventions(interventionForm.getStartDate() , interventionForm .getEndDate() , interventionForm.getPerson() , interventionForm.getProject());
+                        interventionService.saveInterventions(interventionForm.getStartDate(),
+                                interventionForm.getEndDate(), interventionForm.getPerson(),
+                                interventionForm.getProject());
                         return null;
                     }
             );
-             ;
-       ; return null; }).orElseThrow(() -> new ResourceNotFoundException("PersonId " + personId + " not found" +"ProjectId" + projectId + "nt found"));
+            ;
+            ;
+            return null;
+        }).orElseThrow(() -> new ResourceNotFoundException("PersonId " + personId + " not found" + "ProjectId" + projectId + "nt found"));
 
     }
 
     @GetMapping("/{id}")
-    public Optional<Intervention> findInterventionById(@PathVariable(value = "id") Long interventionId)
-    {
+    public Optional<Intervention> findInterventionById(@PathVariable(value = "id") Long interventionId) {
         return interventionService.findById(interventionId);
 
     }
 
     @GetMapping("/project/{projectId}/person/{personId}")
-    List<Intervention> getInterventionByPersonAndProject(@PathVariable(value = "projectId") Long projectId , @PathVariable(value = "personId") Long personId) {
-        return interventionRepository.findByPersonAndProject(projectId,personId);
+    List<Intervention> getInterventionByPersonAndProject(@PathVariable(value = "projectId") Long projectId,
+                                                         @PathVariable(value = "personId") Long personId) {
+        return interventionRepository.findByPersonAndProject(projectId, personId);
     }
 
 
     @GetMapping("/worked/project/{projectId}/person/{personId}")
-    long getworkedByPersonAndProject(@PathVariable(value = "projectId") Long projectId , @PathVariable(value = "personId") Long personId) {
-        return interventionRepository.workedDayByPersonAndProject(projectId,personId);
+    long getworkedByPersonAndProject(@PathVariable(value = "projectId") Long projectId, @PathVariable(value = "personId") Long personId) {
+        return interventionRepository.workedDayByPersonAndProject(projectId, personId);
     }
 
     @DeleteMapping("/person/{personId}/project/{projectId}")
-    public void deleteIntervention(@PathVariable(value = "personId") Long personId,@PathVariable(value = "projectId") Long projectId)
-    {
-        interventionService.deleteIntervention(personId,projectId);
+    public void deleteIntervention(@PathVariable(value = "personId") Long personId, @PathVariable(value = "projectId") Long projectId) {
+        interventionService.deleteIntervention(personId, projectId);
     }
+
     @DeleteMapping("/{id}")
-    public void deleteIntervention(@PathVariable(value = "id") Long id)
-    {
+    public void deleteIntervention(@PathVariable(value = "id") Long id) {
         interventionService.deleteInterventionHistorique(id);
     }
 
-
-
     @Data
     static class InterventionForm {
-        @JsonFormat(pattern="yyyy-MM-dd")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         private Date startDate;
-        @JsonFormat(pattern="yyyy-MM-dd")
+        @JsonFormat(pattern = "yyyy-MM-dd")
         private Date endDate;
         private Person person;
         private Project project;

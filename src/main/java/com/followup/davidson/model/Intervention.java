@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="intervention")
@@ -16,6 +17,9 @@ import java.sql.Date;
 @AllArgsConstructor
 @ToString
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+/**
+ * Intervention est la classe represetant une intervention chez Davidson
+ */
 public class Intervention {
 
     @Id

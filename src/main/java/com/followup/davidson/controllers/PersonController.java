@@ -19,12 +19,12 @@ public class PersonController {
 
     private IManagerService managerService;
 
-    public PersonController(IPersonService personService,IManagerService managerService) {
-        this.personService=personService;
-        this.managerService=managerService;
+    public PersonController(IPersonService personService, IManagerService managerService) {
+        this.personService = personService;
+        this.managerService = managerService;
     }
 
-    @GetMapping( value = "/", produces = { "application/json" })
+    @GetMapping(value = "/", produces = {"application/json"})
     public List<Person> getAllPerson() {
         return personService.findAll();
     }
@@ -32,22 +32,17 @@ public class PersonController {
 
     @PostMapping("/manager/{managerId}/person")
     public Person createPerson(@Valid @RequestBody Person person, @PathVariable(value = "managerId") Long managerId) {
-        return personService.create(person,managerId);
-
-}
+        return personService.create(person, managerId);
+    }
 
     @GetMapping("/{id}")
-    public Optional<Person> findPersonById(@PathVariable(value = "id") Long personId)
-    {
+    public Optional<Person> findPersonById(@PathVariable(value = "id") Long personId) {
         return personService.findById(personId);
-
     }
+
     @DeleteMapping("/{id}")
-    public void deletePerson(@PathVariable(value = "id") Long personId)
-    {
-         personService.deletePerson(personId);
+    public void deletePerson(@PathVariable(value = "id") Long personId) {
+        personService.deletePerson(personId);
     }
-
-
 
 }

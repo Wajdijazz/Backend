@@ -1,4 +1,5 @@
 package com.followup.davidson.controllers;
+
 import com.followup.davidson.Routes;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.ClientRepository;
@@ -12,7 +13,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(Routes.PROJECT  )
+@RequestMapping(Routes.PROJECT)
 
 public class ProjectController {
 
@@ -22,13 +23,13 @@ public class ProjectController {
 
     private ProjectRepository projectRepository;
 
-    public ProjectController(IProjectService projectService ,ClientRepository clientRepository , ProjectRepository projectRepository) {
-        this.projectService=projectService;
-        this.clientRepository=clientRepository;
-        this.projectRepository=projectRepository;
+    public ProjectController(IProjectService projectService, ClientRepository clientRepository, ProjectRepository projectRepository) {
+        this.projectService = projectService;
+        this.clientRepository = clientRepository;
+        this.projectRepository = projectRepository;
     }
 
-    @GetMapping( value = "/", produces = { "application/json" })
+    @GetMapping(value = "/", produces = {"application/json"})
     public List<Project> getAllProject() {
         return projectService.findAll();
     }
@@ -36,14 +37,12 @@ public class ProjectController {
 
     @PostMapping("/client/{clientId}/project")
     public Project createProject(@Valid @RequestBody Project project, @PathVariable(value = "clientId") Long clientId) {
-    return projectService.create(project,clientId);
-
+        return projectService.create(project, clientId);
     }
 
     @GetMapping("/{id}")
     public Optional<Project> findProjectById(@PathVariable(value = "id") Long projectId) {
         return projectService.findById(projectId);
-
     }
 
     @DeleteMapping("/{id}")

@@ -13,55 +13,58 @@ import java.util.Date;
 import java.util.List;
 
 @RepositoryRestResource
-public interface InterventionRepository  extends JpaRepository<Intervention,Long> {
+public interface InterventionRepository extends JpaRepository<Intervention, Long> {
     /**
      * cette methode permet de lister toutes les interventions enregistrés dans la base de données
+     *
      * @return une liste de {@link Intervention}
      */
-    @Query(value="select * from public.intervention " , nativeQuery = true)
+    @Query(value = "select * from public.intervention ", nativeQuery = true)
     List<Intervention> findAll();
 
 
     /**
      * cette methode permet de lister toutes les interventions d'une personne  sur un projet
-     * @param project_id : l 'id du projet selectioné
-     * @param person_id : l'id du personne selectionnée
+     *
+     * @param projectId : l 'id du projet selectioné
+     * @param personId  : l'id du personne selectionnée
      * @return une liste des {@link Intervention}
      */
-    @Query(value="select * from intervention where intervention.person_id= :person_id and intervention.project_id= :project_id ", nativeQuery = true)
-    List<Intervention> findByPersonAndProject(@Param("project_id") long project_id,@Param("person_id")  long person_id);
+    @Query(value = "select * from intervention where intervention.project_id= :projectId  And intervention.person_id= :personId", nativeQuery = true)
+    List<Intervention> findByPersonAndProject(long projectId, long personId);
 
+    //a besoin dans la prochaine sprint
     /**
      * cette methode permet de lister les interventions d'une personne sur un projet dans une periode bien determinée
-     * @param person_id : l'id de la personne selectionée
+     *
+     * @param person_id  : l'id de la personne selectionée
      * @param project_id : l'id du projet
-     * @param firstDate : la date de debut de la periode
+     * @param firstDate  : la date de debut de la periode
      * @param secondDate : la date de fin de la periode
      * @return une liste des {@link Intervention}
      */
-    @Query(value="select count(*) from public.intervention where intervention.person_id= :person_id and intervention.project_id= :project_id and intervention.date between :firstDate AND :secondDate" , nativeQuery = true)
-    long workedDaysByPeriod(@Param("person_id")  long person_id, @Param("project_id") long project_id , @Param("firstDate") Date firstDate , @Param("secondDate") Date secondDate );
-
+/*    @Query(value = "select count(*) from public.intervention where intervention.person_id= :person_id and intervention.project_id= :project_id and intervention.date between :firstDate AND :secondDate", nativeQuery = true)
+    long workedDaysByPeriod(long person_id,long project_id,Date firstDate,Date secondDate);
+*/
     /**
-     *cette methode permet de compter le nombre des jours travaillés d'une personne sur un projet
-     * @param project_id
-     * @param person_id
+     * cette methode permet de compter le nombre des jours travaillés d'une personne sur un projet
+     *
+     * @param projectId
+     * @param personId
      * @return un entier
      */
-    @Query(value="select count(*) from public.intervention where intervention.person_id= :person_id and intervention.project_id= :project_id ", nativeQuery = true)
-    long workedDayByPersonAndProject( @Param("project_id") long project_id,@Param("person_id")  long person_id);
-
-
+    @Query(value = "select count(*) from public.intervention where intervention.project_id= :projectId and intervention.person_id= :personId", nativeQuery = true)
+    long workedDayByPersonAndProject(long projectId,  long personId);
 
 
     /**
-     *cette methode permet de supprimer les interventions par personId et par projectId
+     * cette methode permet de supprimer les interventions par personId et par projectId
+     *
      * @param personId
      * @param projectId
      */
     @Modifying
-    @Query(value=" DELETE FROM intervention i WHERE i.person_id= :personId AND i.project_id= :projectId",nativeQuery = true)
-    void deleteIntervention( @Param("personId") Long personId,@Param("projectId") Long projectId);
-
-        }
+    @Query(value = " DELETE FROM intervention i WHERE i.person_id= :personId AND i.project_id= :projectId", nativeQuery = true)
+    void deleteIntervention(Long personId, Long projectId);
+}
 

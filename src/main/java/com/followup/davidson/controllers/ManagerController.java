@@ -18,7 +18,7 @@ public class ManagerController {
     private IManagerService managerService;
 
     public ManagerController(IManagerService managerService) {
-        this.managerService=managerService;
+        this.managerService = managerService;
     }
 
     @GetMapping("/")
@@ -33,14 +33,12 @@ public class ManagerController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Manager> findManagerById(@PathVariable(value = "id") Long managerId)
-    {
+    public Optional<Manager> findManagerById(@PathVariable(value = "id") Long managerId) {
         return managerService.findById(managerId);
-
     }
+
     @DeleteMapping("/{id}")
-    public void deleteManager(@PathVariable(value = "id") Long managerId)
-    {
+    public void deleteManager(@PathVariable(value = "id") Long managerId) {
         managerService.deleteManager(managerId);
     }
 

@@ -1,16 +1,18 @@
 package com.followup.davidson.controllers;
 
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.followup.davidson.Routes;
 import com.followup.davidson.model.Intervention;
-import com.followup.davidson.model.Person;
-import com.followup.davidson.model.Project;
-import com.followup.davidson.repositories.InterventionRepository;
+
 import com.followup.davidson.repositories.PersonRepository;
 import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.IInterventionService;
+
+import com.followup.davidson.model.Person;
+import com.followup.davidson.model.Project;
+import com.followup.davidson.repositories.InterventionRepository;
+
 import lombok.Data;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -62,7 +65,7 @@ public class InterventionController {
     }
 
     @GetMapping("/{id}")
-    public Intervention findInterventionById(@PathVariable(value = "id") Long interventionId)
+    public Optional<Intervention> findInterventionById(@PathVariable(value = "id") Long interventionId)
     {
         return interventionService.findById(interventionId);
 
@@ -79,10 +82,10 @@ public class InterventionController {
         return interventionRepository.workedDayByPersonAndProject(projectId,personId);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteIntervention(@PathVariable(value = "id") Long interventionId)
+    @DeleteMapping("/person/{personId}/project/{projectId}")
+    public void deleteIntervention(@PathVariable(value = "personId") Long personId,@PathVariable(value = "projectId") Long projectId)
     {
-        interventionService.deleteIntervention(interventionId);
+        interventionService.deleteIntervention(personId,projectId);
     }
 
 

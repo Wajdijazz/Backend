@@ -2,14 +2,13 @@ package com.followup.davidson.controllers;
 
 
 import com.followup.davidson.Routes;
-import com.followup.davidson.model.Client;
 import com.followup.davidson.model.Manager;
 import com.followup.davidson.services.IManagerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -34,7 +33,7 @@ public class ManagerController {
     }
 
     @GetMapping("/{id}")
-    public Manager findManagerById(@PathVariable(value = "id") Long managerId)
+    public Optional<Manager> findManagerById(@PathVariable(value = "id") Long managerId)
     {
         return managerService.findById(managerId);
 

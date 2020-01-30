@@ -3,15 +3,13 @@ package com.followup.davidson.controllers;
 
 import com.followup.davidson.Routes;
 import com.followup.davidson.model.Person;
-import com.followup.davidson.model.Project;
-import com.followup.davidson.repositories.ManagerRepository;
+import com.followup.davidson.services.IManagerService;
 import com.followup.davidson.services.IPersonService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(Routes.PERSON)
@@ -19,11 +17,11 @@ import java.util.List;
 public class PersonController {
     private IPersonService personService;
 
-    private ManagerRepository managerRepository;
+    private IManagerService managerService;
 
-    public PersonController(IPersonService personService,ManagerRepository managerRepository) {
+    public PersonController(IPersonService personService,IManagerService managerService) {
         this.personService=personService;
-        this.managerRepository=managerRepository;
+        this.managerService=managerService;
     }
 
     @GetMapping( value = "/", produces = { "application/json" })
@@ -34,15 +32,12 @@ public class PersonController {
 
     @PostMapping("/manager/{managerId}/person")
     public Person createPerson(@Valid @RequestBody Person person, @PathVariable(value = "managerId") Long managerId) {
-        return managerRepository.findById(managerId).map(manager -> {
-        person.setManager(manager);
-        return personService.create(person);
-    }).orElseThrow(() -> new ResourceNotFoundException("ManagerId " + managerId + " not found"));
+        return personService.create(person,managerId);
 
 }
 
     @GetMapping("/{id}")
-    public Person findPersonById(@PathVariable(value = "id") Long personId)
+    public Optional<Person> findPersonById(@PathVariable(value = "id") Long personId)
     {
         return personService.findById(personId);
 

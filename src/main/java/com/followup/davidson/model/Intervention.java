@@ -2,7 +2,8 @@ package com.followup.davidson.model;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -32,11 +33,12 @@ public class Intervention {
 
     @ManyToOne
     @JoinColumn(name = "person_id")
-
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Person person;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Project project;
 
 

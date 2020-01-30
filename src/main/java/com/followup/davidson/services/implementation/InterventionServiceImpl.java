@@ -9,9 +9,9 @@ import com.followup.davidson.services.IInterventionService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -25,7 +25,9 @@ public class InterventionServiceImpl implements IInterventionService {
 
 
     public List<Intervention> findAll() {
-        return interventionRepository.findAll();
+     return interventionRepository.findAll();
+
+
 
     }
 
@@ -36,8 +38,8 @@ public class InterventionServiceImpl implements IInterventionService {
     }
 
     @Override
-    public Intervention findById(Long id) {
-        return interventionRepository.findById(id).orElse(new Intervention());
+    public Optional<Intervention> findById(Long id) {
+        return interventionRepository.findById(id);
     }
 
 
@@ -56,6 +58,10 @@ public class InterventionServiceImpl implements IInterventionService {
         Calendar cal2 = Calendar.getInstance();
         cal1.setTime(firstDate);
         cal2.setTime(secondDate);
+
+
+       long numberOfDays = 1;
+
         while (cal1.before(cal2)) {
             if ((Calendar.SATURDAY != cal1.get(Calendar.DAY_OF_WEEK))
                     && (Calendar.SUNDAY != cal1.get(Calendar.DAY_OF_WEEK))) {
@@ -77,7 +83,11 @@ public class InterventionServiceImpl implements IInterventionService {
                 interventionRepository.save(intervention2);
             }
             cal1.add(Calendar.DATE,1);
+
         }
+
+
+
     }
 
 
@@ -88,8 +98,8 @@ public class InterventionServiceImpl implements IInterventionService {
 
 
     @Override
-    public void deleteIntervention(Long id) {
-        interventionRepository.deleteById(id);
+    public void deleteIntervention(Long personId,Long projectId) {
+        interventionRepository.deleteIntervention(personId,projectId);
 
     }
 

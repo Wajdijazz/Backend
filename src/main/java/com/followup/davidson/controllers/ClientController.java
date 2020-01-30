@@ -4,11 +4,11 @@ package com.followup.davidson.controllers;
 import com.followup.davidson.Routes;
 import com.followup.davidson.model.Client;
 import com.followup.davidson.services.IClientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -33,7 +33,7 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public Client findClientById(@PathVariable(value = "id") Long clientId)
+    public Optional<Client> findClientById(@PathVariable(value = "id") Long clientId)
     {
         return clientService.findById(clientId);
 

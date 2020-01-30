@@ -7,6 +7,7 @@ import com.followup.davidson.services.IManagerService;
 import com.followup.davidson.services.IPersonService;
 import org.springframework.stereotype.Service;
 
+import javax.management.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -43,8 +44,8 @@ public class PersonServiceImpl implements IPersonService {
 
     @Override
     public void deletePerson(Long id) {
+        personRepository.deleteInterventionByIdPerson(id);
         personRepository.deleteById(id);
-
 
     }
 }

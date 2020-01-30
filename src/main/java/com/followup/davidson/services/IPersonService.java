@@ -10,5 +10,5 @@ public interface IPersonService {
     List<Person> findAll();
     Person create(Person person,Long managerId);
     Optional<Person> findById(Long id);
-    void deletePerson(Long id);
+    void deletePerson(Long personId);
 }

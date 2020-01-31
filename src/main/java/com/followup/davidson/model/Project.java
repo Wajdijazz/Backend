@@ -30,8 +30,4 @@ public class Project {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Client client;
 
-
-
-
-
 }

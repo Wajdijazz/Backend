@@ -105,6 +105,5 @@ public class InterventionController {
         private Date endDate;
         private Person person;
         private Project project;
-
     }
 }

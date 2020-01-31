@@ -35,7 +35,6 @@ public class ClientController {
     @GetMapping("/{id}")
     public Optional<Client> findClientById(@PathVariable(value = "id") Long clientId) {
         return clientService.findById(clientId);
-
     }
 
     @DeleteMapping("/{id}")

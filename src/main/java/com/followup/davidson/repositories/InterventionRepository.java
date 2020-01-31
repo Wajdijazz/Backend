@@ -22,7 +22,6 @@ public interface InterventionRepository extends JpaRepository<Intervention, Long
     @Query(value = "select * from public.intervention ", nativeQuery = true)
     List<Intervention> findAll();
 
-
     /**
      * cette methode permet de lister toutes les interventions d'une personne  sur un projet
      *

@@ -76,7 +76,6 @@ public class ProjectServiceTest {
 
     @Test
     public void findById() {
-
         Mockito.when(projectRepository.findById(1L)).thenReturn(Optional.of(p1));
         assertThat(projectService.findById(1L), is(Optional.of(p1)));
         Mockito.verify(projectRepository, Mockito.times(1)).findById(1L);

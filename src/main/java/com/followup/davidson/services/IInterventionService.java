@@ -13,10 +13,12 @@ public interface IInterventionService {
 
 
     Optional<Intervention> findById(Long id);
-    public List<Intervention> findAll();
+     List<Intervention> findAll();
     void saveInterventions(Date firstDate , Date secondDate , Person person , Project project);
     void deleteIntervention(Long personId,Long projectId);
     void deleteInterventionHistorique(Long id);
+    List<Intervention> findByPersonAndProject(long projectId, long personId);
+    long workedDayByPersonAndProject(long projectId,  long personId);
 
     // void workedDay(Intervention intervention);
 }

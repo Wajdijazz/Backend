@@ -17,6 +17,9 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @ToString
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+/**
+ * Project est la classe represetant un Project chez Davidson
+ */
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,6 +28,9 @@ public class Project {
     @NotEmpty
     private String projectName;
 
+    /**
+     * C'est le client de chaque project
+     */
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "client_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

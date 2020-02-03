@@ -23,7 +23,8 @@ public class ProjectController {
 
     private ProjectRepository projectRepository;
 
-    public ProjectController(IProjectService projectService, ClientRepository clientRepository, ProjectRepository projectRepository) {
+    public ProjectController(IProjectService projectService, ClientRepository clientRepository,
+                             ProjectRepository projectRepository) {
         this.projectService = projectService;
         this.clientRepository = clientRepository;
         this.projectRepository = projectRepository;

@@ -29,7 +29,8 @@ public interface InterventionRepository extends JpaRepository<Intervention, Long
      * @param personId  : l'id du personne selectionnée
      * @return une liste des {@link Intervention}
      */
-    @Query(value = "select * from intervention where intervention.project_id= :projectId  And intervention.person_id= :personId", nativeQuery = true)
+    @Query(value = "select * from intervention where intervention.project_id= :projectId  And intervention.person_id= :personId",
+                    nativeQuery = true)
     List<Intervention> findByPersonAndProject(long projectId, long personId);
 
     //a besoin dans la prochaine sprint
@@ -52,7 +53,8 @@ public interface InterventionRepository extends JpaRepository<Intervention, Long
      * @param personId
      * @return un entier
      */
-    @Query(value = "select count(*) from public.intervention where intervention.project_id= :projectId and intervention.person_id= :personId", nativeQuery = true)
+    @Query(value = "select count(*) from public.intervention where intervention.project_id= :projectId and intervention.person_id= :personId",
+            nativeQuery = true)
     long workedDayByPersonAndProject(long projectId,  long personId);
 
 
@@ -63,7 +65,8 @@ public interface InterventionRepository extends JpaRepository<Intervention, Long
      * @param projectId
      */
     @Modifying
-    @Query(value = " DELETE FROM intervention i WHERE i.person_id= :personId AND i.project_id= :projectId", nativeQuery = true)
+    @Query(value = " DELETE FROM intervention i WHERE i.person_id= :personId AND i.project_id= :projectId",
+            nativeQuery = true)
     void deleteIntervention(Long personId, Long projectId);
 }
 

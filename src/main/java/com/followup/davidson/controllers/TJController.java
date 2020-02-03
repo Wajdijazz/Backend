@@ -34,7 +34,8 @@ public class TJController {
     }
 
     @PostMapping("/project/{projectId}/person/{personId}")
-    public TJ createTj(@Valid @RequestBody TJ tj, @PathVariable(value = "projectId") Long projectId, @PathVariable(value = "personId") Long personId) {
+    public TJ createTj(@Valid @RequestBody TJ tj, @PathVariable(value = "projectId") Long projectId,
+                       @PathVariable(value = "personId") Long personId) {
         return tjService.create(tj, projectId, personId);
     }
 

@@ -27,19 +27,28 @@ public class Intervention {
     @Column(name = "intervention_id")
     private Long interventionId;
 
+    /**
+     * Cette date présente tous les jours de la période d'intervention
+     */
     @Column(name ="Date")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
-
+    /**
+     * Cette mode présente les deux partie de la journée PM ou bien AM
+     */
     private Mode mode;
 
-    private long worked;
-
+    /**
+     * C'est la personne affectée à chaque intervention
+     */
     @ManyToOne
     @JoinColumn(name = "person_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Person person;
 
+    /**
+     * C'est le projec affecté à chaque intervention
+     */
     @ManyToOne
     @JoinColumn(name = "project_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

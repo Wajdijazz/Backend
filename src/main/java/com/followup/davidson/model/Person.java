@@ -39,7 +39,6 @@ public class Person {
     @NotEmpty
     private String lastName;
 
-
     /**
      * manager presente le manager de chaque consultant
      */

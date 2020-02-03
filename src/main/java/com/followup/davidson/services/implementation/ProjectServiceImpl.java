@@ -20,34 +20,53 @@ public class ProjectServiceImpl implements IProjectService {
     private IClientService clientService;
 
 
-
-    public ProjectServiceImpl(ProjectRepository projectRepository,IClientService clientService) {
-        this.projectRepository=projectRepository;
-        this.clientService=clientService;
+    public ProjectServiceImpl(ProjectRepository projectRepository, IClientService clientService) {
+        this.projectRepository = projectRepository;
+        this.clientService = clientService;
     }
 
+    /**
+     * Cette methode permet de lister tous les projets de davidsons
+     *
+     * @return une liste des {@link Project}
+     */
     @Override
     public List<Project> findAll() {
-        return  projectRepository.findAll();    }
+        return projectRepository.findAll();
+    }
 
+    /**
+     * Cette methode permet de retourner un projet par id
+     *
+     * @param id
+     * @return un client
+     */
     @Override
     public Optional<Project> findById(Long id) {
         return projectRepository.findById(id);
     }
 
+    /**
+     * Cette methode permet de créer et sauvgarder un nouveau projet
+     *
+     * @param project
+     * @return projet crée
+     */
     @Override
     public Project create(Project project, Long clientId) {
-        Optional<Client> client= clientService.findById(clientId);
+        Optional<Client> client = clientService.findById(clientId);
         project.setClient(client.get());
         return projectRepository.save(project);
     }
 
-
-
+    /**
+     * Cette methode permet de supprimer un projet par son id
+     *
+     * @param id
+     */
     @Override
     public void deleteProject(Long id) {
         projectRepository.deleteInterventionByIdProject(id);
         projectRepository.deleteById(id);
-
     }
 }

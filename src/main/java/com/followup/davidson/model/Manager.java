@@ -16,6 +16,9 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @ToString
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+/**
+ * Manager est la classe represetant un manager chez Davidson
+ */
 public class Manager {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

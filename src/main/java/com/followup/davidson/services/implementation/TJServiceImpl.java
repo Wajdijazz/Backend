@@ -1,5 +1,6 @@
 package com.followup.davidson.services.implementation;
 
+import com.followup.davidson.model.Client;
 import com.followup.davidson.model.Person;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.model.TJ;
@@ -15,38 +16,60 @@ import java.util.Optional;
 
 @Transactional
 @Service
-public class TJServiceImpl  implements ITJService {
+public class TJServiceImpl implements ITJService {
     private TJRepository tjRepository;
     private IProjectService projectService;
     private IPersonService personService;
 
-    public TJServiceImpl(TJRepository tjRepository,IProjectService projectService,IPersonService personService) {
-        this.tjRepository=tjRepository;
-        this.projectService=projectService;
-        this.personService=personService;
+    public TJServiceImpl(TJRepository tjRepository, IProjectService projectService, IPersonService personService) {
+        this.tjRepository = tjRepository;
+        this.projectService = projectService;
+        this.personService = personService;
     }
 
+    /**
+     * Cette methode permet de lister tous les TJ de chaque personne et pour chaque projet
+     *
+     * @return une liste des {@link Client}
+     */
     @Override
     public List<TJ> findAll() {
         return tjRepository.findAll();
-
     }
 
+    /**
+     * Cette methode permet de créer et sauvgarder un nouveau taus de jour
+     *
+     * @param tj
+     * @param projectId
+     * @param personId
+     * @return le TJ crée
+     */
     @Override
     public TJ create(TJ tj, Long projectId, Long personId) {
-        Optional<Project> project= projectService.findById(projectId);
-        Optional<Person> person= personService.findById(personId);
+        Optional<Project> project = projectService.findById(projectId);
+        Optional<Person> person = personService.findById(personId);
         tj.setProject(project.get());
         tj.setPerson(person.get());
-        return  tjRepository.save(tj);
+        return tjRepository.save(tj);
     }
 
-
+    /**
+     * Cette methode permet de retourner un taux de jour par id
+     *
+     * @param id
+     * @return un TJ
+     */
     @Override
     public Optional<TJ> findById(Long id) {
         return tjRepository.findById(id);
     }
 
+    /**
+     * Cette methode permet de supprimer un tj par id
+     *
+     * @param id
+     */
     @Override
     public void deleteTj(Long id) {
         tjRepository.deleteById(id);

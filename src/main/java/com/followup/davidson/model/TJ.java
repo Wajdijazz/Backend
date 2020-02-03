@@ -15,20 +15,26 @@ import javax.persistence.*;
 @AllArgsConstructor
 @ToString
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+/**
+ * TJ est la classe represetant le taux de jour des consultants chez Davidson
+ */
 public class TJ {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long tjId;
 
-
     private double  tarif;
 
+    /**
+     * La personne affectée à ce taux de jour
+     */
     @ManyToOne
     @JoinColumn(name="person_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-
     private Person person;
-
+    /**
+     * Le projet affecté à ce taux de jour
+     */
     @ManyToOne
     @JoinColumn(name="project_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

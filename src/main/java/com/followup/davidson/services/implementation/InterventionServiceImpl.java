@@ -22,7 +22,6 @@ public class InterventionServiceImpl implements IInterventionService {
         this.interventionRepository = interventionRepository;
     }
 
-
     /**
      * Cette methode permet de retourner une intervention par id
      *
@@ -43,7 +42,6 @@ public class InterventionServiceImpl implements IInterventionService {
     public List<Intervention> findAll() {
         return interventionRepository.findAll();
     }
-
 
     /**
      * cette methode permet de sauvgarder lhistorique des interventions d'une personne sur un projet par details , les weekend sont
@@ -91,15 +89,49 @@ public class InterventionServiceImpl implements IInterventionService {
         return sDate;
     }
 
+    /**
+     * Cette methode permet de supprimer tous les interventions par l'id de personne et l'id de projet au méme temps
+     *
+     * @param personId
+     * @param projectId
+     */
     @Override
     public void deleteIntervention(Long personId, Long projectId) {
         interventionRepository.deleteIntervention(personId, projectId);
     }
 
+    /**
+     * Cette methode permet de supprimer une intervention par id intervention
+     *
+     * @param id
+     */
     @Override
     public void deleteInterventionHistorique(Long id) {
         interventionRepository.deleteById(id);
     }
 
+    /**
+     * Cette methode permet de trouver tous les interventions par l'id de personne et l'id de projet au méme temps
+     *
+     * @param projectId
+     * @param personId
+     * @return
+     */
+    @Override
+    public List<Intervention> findByPersonAndProject(long projectId, long personId) {
+        return interventionRepository.findByPersonAndProject(projectId, personId);
+    }
+
+    /**
+     * cette methode permet de compter le nombre des jours travaillés d'une personne sur un projet
+     *
+     * @param projectId
+     * @param personId
+     * @return un entier
+     */
+    @Override
+    public long workedDayByPersonAndProject(long projectId, long personId) {
+        return interventionRepository.workedDayByPersonAndProject(projectId, personId);
+    }
 
 }

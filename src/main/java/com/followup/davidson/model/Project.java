@@ -29,7 +29,7 @@ public class Project {
     private String projectName;
 
     /**
-     * C'est le client de chaque project
+     * C'est le client de chaque projet
      */
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "client_id")

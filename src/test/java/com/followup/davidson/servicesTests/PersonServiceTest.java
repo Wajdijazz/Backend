@@ -82,7 +82,6 @@ private static Manager m1;
 
     @Test
     public void findById() {
-
         Mockito.when(personRepository.findById(1L)).thenReturn(Optional.of(p1));
         assertThat(personService.findById(1L), is(Optional.of(p1)));
         Mockito.verify(personRepository, Mockito.times(1)).findById(1L);

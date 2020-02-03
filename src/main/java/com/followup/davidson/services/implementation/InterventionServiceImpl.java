@@ -1,11 +1,14 @@
 package com.followup.davidson.services.implementation;
 
+import com.followup.davidson.controllers.InterventionController;
 import com.followup.davidson.model.Intervention;
 import com.followup.davidson.model.Mode;
 import com.followup.davidson.model.Person;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.InterventionRepository;
 import com.followup.davidson.services.IInterventionService;
+import com.followup.davidson.services.IPersonService;
+import com.followup.davidson.services.IProjectService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,9 +20,14 @@ import java.util.*;
 public class InterventionServiceImpl implements IInterventionService {
 
     InterventionRepository interventionRepository;
+    private IProjectService projectService;
+    private IPersonService personService;
 
-    public InterventionServiceImpl(InterventionRepository interventionRepository) {
+    public InterventionServiceImpl(InterventionRepository interventionRepository, IProjectService projectService,
+                                   IPersonService personService) {
         this.interventionRepository = interventionRepository;
+        this.projectService = projectService;
+        this.personService = personService;
     }
 
     /**
@@ -48,40 +56,39 @@ public class InterventionServiceImpl implements IInterventionService {
      * automatiquement eliminés
      * elle prend en paramatre , date de debut des interventions et date de fins des interventions
      *
-     * @param firstDate
-     * @param secondDate
-     * @param person
-     * @param project
+     * @param interventionForm
+     * @param personId
+     * @param projectId
      */
     @Override
-    public void saveInterventions(Date firstDate, Date secondDate, Person person, Project project) {
+    public Object saveInterventions(InterventionController.InterventionForm interventionForm, Long personId, Long projectId) {
+        Optional<Project> project = projectService.findById(projectId);
+        Optional<Person> person = personService.findById(personId);
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
-        cal1.setTime(firstDate);
-        cal2.setTime(secondDate);
-        long numberOfDays = 1;
+        cal1.setTime(interventionForm.getStartDate());
+        cal2.setTime(interventionForm.getEndDate());
         while (cal1.before(cal2)) {
             if ((Calendar.SATURDAY != cal1.get(Calendar.DAY_OF_WEEK))
                     && (Calendar.SUNDAY != cal1.get(Calendar.DAY_OF_WEEK))) {
                 Date date = cal1.getTime();
                 Intervention intervention1 = new Intervention();
                 Intervention intervention2 = new Intervention();
-                intervention1.setPerson(person);
-                intervention1.setProject(project);
-                intervention2.setPerson(person);
-                intervention2.setProject(project);
+                intervention1.setPerson(person.get());
+                intervention1.setProject(project.get());
+                intervention2.setPerson(person.get());
+                intervention2.setProject(project.get());
                 java.sql.Date sDate = convertUtilToSql(date);
                 intervention1.setDate(sDate);
                 intervention2.setDate(sDate);
                 intervention1.setMode(Mode.AM);
                 intervention2.setMode(Mode.PM);
-                System.out.println(intervention1);
-                System.out.println(intervention2);
                 interventionRepository.save(intervention1);
                 interventionRepository.save(intervention2);
             }
             cal1.add(Calendar.DATE, 1);
         }
+        return interventionForm;
     }
 
     private static java.sql.Date convertUtilToSql(java.util.Date uDate) {

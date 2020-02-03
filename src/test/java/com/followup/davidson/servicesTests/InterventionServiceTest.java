@@ -1,10 +1,13 @@
 package com.followup.davidson.servicesTests;
 
 
+import com.followup.davidson.controllers.InterventionController;
 import com.followup.davidson.controllers.PersonController;
 import com.followup.davidson.controllers.ProjectController;
 import com.followup.davidson.model.*;
 import com.followup.davidson.repositories.InterventionRepository;
+import com.followup.davidson.repositories.PersonRepository;
+import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.implementation.InterventionServiceImpl;
 import com.followup.davidson.services.implementation.PersonServiceImpl;
 import com.followup.davidson.services.implementation.ProjectServiceImpl;
@@ -34,21 +37,19 @@ public class InterventionServiceTest {
     private static Intervention int2;
     private static Project p1;
     private static Person pe1;
+    private static InterventionController.InterventionForm interventionForm;
+
+
     @Mock
     private InterventionRepository interventionRepository;
-
     @InjectMocks
     private InterventionServiceImpl interventionService;
-
     @Mock
     private ProjectServiceImpl projectService;
-
     @InjectMocks
     private ProjectController projectController;
-
     @Mock
     private PersonServiceImpl personService;
-
     @InjectMocks
     private PersonController personController;
 
@@ -63,6 +64,8 @@ public class InterventionServiceTest {
         int2 = new Intervention(1L, new Date(2020 - 01 - 18), Mode.AM, null, null);
         p1 = new Project(1L, "Followup", null);
         pe1 = new Person(1L, "Wajdi", "Jaziri", null);
+        interventionForm = new InterventionController.InterventionForm(new Date(2020 - 02 - 03),
+                new Date(2020 - 03 - 06), null, null);
     }
 
     @Test
@@ -100,6 +103,16 @@ public class InterventionServiceTest {
         interventionService.deleteInterventionHistorique(1L);
         Mockito.verify(interventionRepository, Mockito.times(1)).deleteById(1L);
     }
+    @Test
+    void create() {
+        Mockito.when(projectService.findById(1L)).thenReturn(Optional.of(p1));
+        Optional<Project> p = projectController.findProjectById(1L);
+        assertThat(p.get(), is(p1) );
 
+        Mockito.when(personService.findById(1L)).thenReturn(Optional.of(pe1));
+        Optional<Person> pe = personController.findPersonById(1L);
+        assertThat(pe.get(), is(pe1) );
+        assertThat(interventionService.saveInterventions(interventionForm,1L,1L), is(interventionForm));
+    }
 
 }

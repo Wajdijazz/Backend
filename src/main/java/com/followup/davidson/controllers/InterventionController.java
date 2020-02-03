@@ -13,7 +13,10 @@ import com.followup.davidson.model.Person;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.InterventionRepository;
 
-import lombok.Data;
+import com.followup.davidson.services.IPersonService;
+import com.followup.davidson.services.IProjectService;
+import com.followup.davidson.services.implementation.ProjectServiceImpl;
+import lombok.*;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,16 +32,15 @@ public class InterventionController {
 
 
     private IInterventionService interventionService;
-    private ProjectRepository projectRepository;
-    private PersonRepository personRepository;
-    private InterventionRepository interventionRepository;
+    private IProjectService projectService;
+    private IPersonService personService;
 
 
-    public InterventionController(IInterventionService interventionService, ProjectRepository projectRepository,
-                                  PersonRepository personRepository, InterventionRepository interventionRepository) {
-        this.projectRepository = projectRepository;
-        this.personRepository = personRepository;
-        this.interventionRepository = interventionRepository;
+
+    public InterventionController(IInterventionService interventionService, IProjectService projectService,
+                                  IPersonService personService, InterventionRepository interventionRepository) {
+        this.projectService = projectService;
+        this.personService = personService;
         this.interventionService = interventionService;
     }
 
@@ -51,23 +53,7 @@ public class InterventionController {
     public Object createIntervention(@Valid @RequestBody InterventionForm interventionForm,
                                      @PathVariable(value = "projectId") Long projectId
             , @PathVariable(value = "personId") Long personId) {
-        System.out.println(interventionForm);
-        return projectRepository.findById(projectId).map(project -> {
-            interventionForm.setProject(project);
-            personRepository.findById(personId).map(person -> {
-                        interventionForm.setPerson(person);
-                        interventionService.saveInterventions(interventionForm.getStartDate(),
-                                interventionForm.getEndDate(), interventionForm.getPerson(),
-                                interventionForm.getProject());
-                        return null;
-                    }
-            );
-            ;
-            ;
-            return null;
-        }).orElseThrow(() -> new ResourceNotFoundException("PersonId " + personId + " not found" +
-                "ProjectId" + projectId + "nt found"));
-
+                return interventionService.saveInterventions(interventionForm,personId,projectId);
     }
 
     @GetMapping("/{id}")
@@ -99,7 +85,11 @@ public class InterventionController {
     }
 
     @Data
-    static class InterventionForm {
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @ToString
+   public static class InterventionForm {
         @JsonFormat(pattern = "yyyy-MM-dd")
         private Date startDate;
         @JsonFormat(pattern = "yyyy-MM-dd")

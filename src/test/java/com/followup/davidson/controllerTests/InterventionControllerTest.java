@@ -5,7 +5,12 @@ import com.followup.davidson.controllers.InterventionController;
 import com.followup.davidson.model.Intervention;
 import com.followup.davidson.model.Person;
 import com.followup.davidson.model.Project;
+import com.followup.davidson.model.TJ;
+import com.followup.davidson.repositories.PersonRepository;
+import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.implementation.InterventionServiceImpl;
+import com.followup.davidson.services.implementation.PersonServiceImpl;
+import com.followup.davidson.services.implementation.ProjectServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -32,12 +37,15 @@ import static org.mockito.Mockito.lenient;
 public class InterventionControllerTest {
     private static Intervention it1;
     private static Intervention it2;
-    private static  Person pe1;
+    private static InterventionController.InterventionForm interventionForm;
+    private static Person pe1;
     private static Project p1;
     @Mock
     private InterventionServiceImpl interventionService;
     @InjectMocks
     private InterventionController interventionController;
+
+
 
     @Before
     public void setUp() {
@@ -48,8 +56,8 @@ public class InterventionControllerTest {
     public static void init() {
         it1 = new Intervention(1L, new Date(2020 - 01 - 01), AM, null, null);
         it2 = new Intervention(2L, new Date(2020 - 01 - 01), AM, null, null);
-        p1 = new Project(1L, "Followup", null);
-        pe1 = new Person(1L, "Wajdi", "Jaziri", null);
+        interventionForm = new InterventionController.InterventionForm(new Date(2020 - 02 - 03),
+                new Date(2020 - 03 - 06), null, null);
     }
 
     @Test
@@ -68,15 +76,27 @@ public class InterventionControllerTest {
 
     @Test
     void deleteById1anId2_WhenFound() {
-        lenient().when(interventionService.findByPersonAndProject(1L,1L )).thenReturn(Arrays.asList(it1, it2));
-        interventionController.deleteInterventionByIdPersonAndProject(1L,1L);
-        Mockito.verify(interventionService, Mockito.times(1)).deleteIntervention(1L,1L);
+        lenient().when(interventionService.findByPersonAndProject(1L, 1L))
+                .thenReturn(Arrays.asList(it1, it2));
+        interventionController.deleteInterventionByIdPersonAndProject(1L, 1L);
+        Mockito.verify(interventionService, Mockito.times(1))
+                .deleteIntervention(1L, 1L);
     }
-   @Test
+
+    @Test
     void deleteById_WhenFound() {
         lenient().when(interventionService.findById(1L)).thenReturn(Optional.of(it1));
         interventionController.deleteInterventionById(1L);
-        Mockito.verify(interventionService, Mockito.times(1)).deleteInterventionHistorique(1L);
+        Mockito.verify(interventionService, Mockito.times(1))
+                .deleteInterventionHistorique(1L);
     }
+
+    @Test
+    void create() {
+        Object intervention = interventionController.createIntervention(interventionForm, 1L, 1L);
+        Mockito.verify(interventionService, Mockito.times(1))
+                .saveInterventions(interventionForm,1L,1L);
+  }
+
 
 }

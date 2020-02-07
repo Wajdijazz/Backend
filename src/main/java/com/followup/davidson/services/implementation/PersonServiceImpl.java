@@ -1,6 +1,5 @@
 package com.followup.davidson.services.implementation;
 
-import com.followup.davidson.model.Client;
 import com.followup.davidson.model.Manager;
 import com.followup.davidson.model.Person;
 import com.followup.davidson.repositories.PersonRepository;
@@ -8,7 +7,6 @@ import com.followup.davidson.services.IManagerService;
 import com.followup.davidson.services.IPersonService;
 import org.springframework.stereotype.Service;
 
-import javax.management.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -57,6 +55,22 @@ public class PersonServiceImpl implements IPersonService {
     @Override
     public Optional<Person> findById(Long id) {
         return personRepository.findById(id);
+    }
+
+    /**
+     * Cette methode permet de modifier les les coordonnées  d'une personne par son id
+     *
+     * @param id
+     * @param managerId
+     */
+    @Override
+    public Person update(Long id, Person person, Long managerId) {
+        Optional<Person> personUp = personRepository.findById(id);
+        Optional<Manager> manager = managerService.findById(managerId);
+        personUp.get().setFirstName(person.getFirstName());
+        personUp.get().setLastName(person.getLastName());
+        personUp.get().setManager(manager.get());
+        return personRepository.save(personUp.get());
     }
 
     /**

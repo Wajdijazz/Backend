@@ -1,9 +1,6 @@
 package com.followup.davidson.services.implementation;
 
-import com.followup.davidson.model.Client;
-import com.followup.davidson.model.Person;
-import com.followup.davidson.model.Project;
-import com.followup.davidson.model.TJ;
+import com.followup.davidson.model.*;
 import com.followup.davidson.repositories.TJRepository;
 import com.followup.davidson.services.IPersonService;
 import com.followup.davidson.services.IProjectService;
@@ -11,8 +8,10 @@ import com.followup.davidson.services.ITJService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -55,6 +54,24 @@ public class TJServiceImpl implements ITJService {
     }
 
     /**
+     * Cette methode permet de modifier un taux de jour pour une personne et sur un projet par son id
+     *
+     * @param id
+     * @param projetId
+     * @param personId
+     */
+    @Override
+    public TJ update(Long id, TJ tj, Long projetId, Long personId) {
+        Optional<TJ> tjUp = tjRepository.findById(id);
+        Optional<Project> project = projectService.findById(projetId);
+        Optional<Person> person = personService.findById(personId);
+        tjUp.get().setTarif(tj.getTarif());
+        tjUp.get().setProject(project.get());
+        tjUp.get().setPerson(person.get());
+        return tjRepository.save(tjUp.get());
+    }
+
+    /**
      * Cette methode permet de retourner un taux de jour par id
      *
      * @param id
@@ -74,4 +91,11 @@ public class TJServiceImpl implements ITJService {
     public void deleteTj(Long id) {
         tjRepository.deleteById(id);
     }
+
+    @Override
+    public long TjByProjectAndPerson(long projectId,long personId) {
+        return tjRepository.TjByProjectAndPerson(projectId,personId);
+    }
+
+
 }

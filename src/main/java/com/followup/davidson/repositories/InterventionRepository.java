@@ -55,7 +55,7 @@ public interface InterventionRepository extends JpaRepository<Intervention, Long
      */
     @Query(value = "select count(*) from public.intervention where intervention.project_id= :projectId and intervention.person_id= :personId",
             nativeQuery = true)
-    long workedDayByPersonAndProject(long projectId,  long personId);
+  long workedDayByPersonAndProject(long projectId,  long personId);
 
 
     /**

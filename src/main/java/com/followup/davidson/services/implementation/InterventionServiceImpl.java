@@ -9,11 +9,13 @@ import com.followup.davidson.repositories.InterventionRepository;
 import com.followup.davidson.services.IInterventionService;
 import com.followup.davidson.services.IPersonService;
 import com.followup.davidson.services.IProjectService;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -87,6 +89,7 @@ public class InterventionServiceImpl implements IInterventionService {
                 interventionRepository.save(intervention2);
             }
             cal1.add(Calendar.DATE, 1);
+            System.out.println (cal1);
         }
         return interventionForm;
     }
@@ -126,7 +129,13 @@ public class InterventionServiceImpl implements IInterventionService {
      */
     @Override
     public List<Intervention> findByPersonAndProject(long projectId, long personId) {
-        return interventionRepository.findByPersonAndProject(projectId, personId);
+
+
+        List<Intervention> interventions= interventionRepository.findByPersonAndProject(projectId, personId);
+
+       return interventions;
+
+
     }
 
     /**

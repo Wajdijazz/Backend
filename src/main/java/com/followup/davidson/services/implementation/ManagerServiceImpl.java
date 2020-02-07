@@ -52,6 +52,18 @@ public class ManagerServiceImpl implements IManagerService {
     public Optional<Manager> findById(Long id) {
         return managerRepository.findById(id);
     }
+    /**
+     * Cette methode permet de modifier les les coordonnées  d'un manager par son id
+     *
+     * @param id
+     */
+    @Override
+    public Manager update(Long id,Manager manager) {
+        Optional<Manager> managerUp=managerRepository.findById(id);
+        managerUp.get().setFirstName(manager.getFirstName());
+        managerUp.get().setLastName(manager.getLastName());
+        return managerRepository.save(managerUp.get());
+    }
 
     /**
      * Cette methode permet de supprimer un manager par son id

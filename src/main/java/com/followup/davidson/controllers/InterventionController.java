@@ -69,7 +69,7 @@ public class InterventionController {
 
     @GetMapping("/worked/project/{projectId}/person/{personId}")
     long getworkedByPersonAndProject(@PathVariable(value = "projectId") Long projectId,
-                                     @PathVariable(value = "personId") Long personId) {
+                                              @PathVariable(value = "personId") Long personId) {
         return interventionService.workedDayByPersonAndProject(projectId, personId);
     }
 

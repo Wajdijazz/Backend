@@ -6,6 +6,7 @@ import com.followup.davidson.model.Manager;
 import com.followup.davidson.services.IManagerService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,13 @@ public class ManagerController {
     @GetMapping("/{id}")
     public Optional<Manager> findManagerById(@PathVariable(value = "id") Long managerId) {
         return managerService.findById(managerId);
+    }
+
+    @Transactional
+    @PutMapping("/{id}")
+    public Manager updateManager(@PathVariable(value = "id") Long id, @RequestBody Manager manager)
+    {
+        return managerService.update(id,manager);
     }
 
     @DeleteMapping("/{id}")

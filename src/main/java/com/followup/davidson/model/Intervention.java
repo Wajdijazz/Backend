@@ -41,7 +41,7 @@ public class Intervention {
     /**
      * C'est la personne affectée à chaque intervention
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Person person;
@@ -49,7 +49,7 @@ public class Intervention {
     /**
      * C'est le projec affecté à chaque intervention
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Project project;

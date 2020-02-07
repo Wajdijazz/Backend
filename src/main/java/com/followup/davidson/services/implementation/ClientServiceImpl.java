@@ -51,6 +51,19 @@ public class ClientServiceImpl implements IClientService {
     }
 
     /**
+     * Cette methode permet de modifier les les coordonnées  d'un client par son id
+     *
+     * @param id
+     */
+    @Override
+    public Client update(Long id, Client client) {
+        Optional<Client> clientUp=clientRepository.findById(id);
+        clientUp.get().setClientName(client.getClientName());
+        clientUp.get().setClientContact(client.getClientContact());
+        return clientRepository.save(clientUp.get());
+    }
+
+    /**
      * Cette methode permet de supprimer un client par son id
      *
      * @param id

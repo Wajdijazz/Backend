@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -36,6 +37,7 @@ public class ManagerControllerTest {
 
     @InjectMocks
     private ManagerController managerController;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -43,8 +45,8 @@ public class ManagerControllerTest {
 
     @BeforeAll
     public static void init() {
-        m1=new Manager(1L,"Wajdi","Jaziri");
-        m2=new Manager(2L,"test","test");
+        m1 = new Manager(1L, "Wajdi", "Jaziri");
+        m2 = new Manager(2L, "test", "test");
     }
 
 
@@ -55,6 +57,7 @@ public class ManagerControllerTest {
         assertThat(managerController.getAllManager().size(), is(0));
         Mockito.verify(managerService, Mockito.times(1)).findAll();
     }
+
     @Test
     void findAll_whenRecord() {
 
@@ -62,23 +65,32 @@ public class ManagerControllerTest {
         assertThat(managerController.getAllManager().size(), is(2));
         Mockito.verify(managerService, Mockito.times(1)).findAll();
     }
+
     @Test
     void create() {
 
-        Manager m= managerController.createManager(m1);
+        Manager m = managerController.createManager(m1);
         Mockito.verify(managerService, Mockito.times(1)).create(m1);
 
 
     }
+
     @Test
     void findById_WhenMatch() {
 
         Mockito.when(managerService.findById(1L)).thenReturn(Optional.of(m1));
         Optional<Manager> m = managerController.findManagerById(1L);
-        assertThat(m.get(), is(m1) );
-
-
+        assertThat(m.get(), is(m1));
     }
+/*
+    @Test
+    void update_WhenFound() {
+        Mockito.when(managerService.findById(1L)).thenReturn(Optional.of(m1));
+        Mockito.when(managerService.update(1L, m1)).thenReturn(m2);
+        assertThat(managerController.updateManager(2L, m2), is(m2));
+        Mockito.verify(managerService, Mockito.times(1)).update(1L, m1);
+    }
+*/
     @Test
     void deleteById_WhenFound() {
 

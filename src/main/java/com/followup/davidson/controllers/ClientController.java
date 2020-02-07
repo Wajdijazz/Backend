@@ -3,9 +3,11 @@ package com.followup.davidson.controllers;
 
 import com.followup.davidson.Routes;
 import com.followup.davidson.model.Client;
+import com.followup.davidson.model.Manager;
 import com.followup.davidson.services.IClientService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +28,6 @@ public class ClientController {
         return clientService.findAll();
     }
 
-
     @PostMapping("/")
     public Client createClient(@Valid @RequestBody Client client) {
         return clientService.create(client);
@@ -37,6 +38,12 @@ public class ClientController {
         return clientService.findById(clientId);
     }
 
+    @Transactional
+    @PutMapping("/{id}")
+    public Client updateClient(@PathVariable(value = "id") Long id, @RequestBody Client client)
+    {
+        return clientService.update(id,client);
+    }
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable(value = "id") Long clientId) {
         clientService.deleteClient(clientId);

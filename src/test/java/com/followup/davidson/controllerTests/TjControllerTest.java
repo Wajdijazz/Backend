@@ -25,7 +25,7 @@ import static org.mockito.Mockito.lenient;
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 public class TjControllerTest {
-    private static TJ tj1;
+ /*   private static TJ tj1;
     private static TJ tj2;
     @Mock
     private ITJService tjService;
@@ -82,5 +82,5 @@ public class TjControllerTest {
         Mockito.verify(tjService, Mockito.times(1)).create(tj1,1L,1L);
 
     }
-
+*/
 }

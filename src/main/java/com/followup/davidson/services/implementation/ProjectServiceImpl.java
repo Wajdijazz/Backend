@@ -1,6 +1,8 @@
 package com.followup.davidson.services.implementation;
 
 import com.followup.davidson.model.Client;
+import com.followup.davidson.model.Manager;
+import com.followup.davidson.model.Person;
 import com.followup.davidson.model.Project;
 import com.followup.davidson.repositories.ProjectRepository;
 import com.followup.davidson.services.IClientService;
@@ -57,6 +59,21 @@ public class ProjectServiceImpl implements IProjectService {
         Optional<Client> client = clientService.findById(clientId);
         project.setClient(client.get());
         return projectRepository.save(project);
+    }
+
+    /**
+     * Cette methode permet de modifier  les informations  d'un projet par son id
+     *
+     * @param id
+     * @param clientId
+     */
+    @Override
+    public Project update(Long id, Project project, Long clientId) {
+        Optional<Project> projectUp = projectRepository.findById(id);
+        Optional<Client> client = clientService.findById(clientId);
+        projectUp.get().setProjectName(project.getProjectName());
+        projectUp.get().setClient(client.get());
+        return projectRepository.save(projectUp.get());
     }
 
     /**

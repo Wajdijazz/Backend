@@ -43,9 +43,9 @@ public class Person {
      * manager presente le manager de chaque consultant
      */
 
-   @ManyToOne
+   @ManyToOne(cascade = CascadeType.PERSIST)
    @JoinColumn(name="manager_id")
-   @OnDelete(action = OnDeleteAction.CASCADE)
+  // @OnDelete(action = OnDeleteAction.CASCADE)
   private Manager manager;
 
 }

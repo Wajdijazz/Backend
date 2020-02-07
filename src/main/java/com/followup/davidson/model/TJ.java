@@ -28,16 +28,14 @@ public class TJ {
     /**
      * La personne affectée à ce taux de jour
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="person_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Person person;
     /**
      * Le projet affecté à ce taux de jour
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="project_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Project project;
 
 }
